@@ -78,7 +78,7 @@ export default function ResponsiveSizes(
             <Burger opened={opened} onClick={toggle} hiddenFrom="sm" size="sm" />
           <div className="flex flex-row min-w-full items-center justify-start md:justify-between pl-4 pr-4">
             <span className={cx([classes.logo, poppins_logo.className])}>VVIMS <span style={{color: "#17DBCC"}}>®</span></span>
-            <p className={classes.abrev}>SED</p>
+            <p className={classes.abrev}>CNPS</p>
             <UserTopButton />
           </div>
         </div>
