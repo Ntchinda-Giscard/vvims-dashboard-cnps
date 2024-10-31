@@ -4,7 +4,7 @@ import { createClient } from "graphql-ws";
 import { getMainDefinition } from '@apollo/client/utilities';
 
 // Add the admin secret here
-const adminSecret = "aFVeqGfcVsDTpS7efXQZ1rlMyIJugSBJ";
+const adminSecret = "0eW0K95t9BxtSPgXo6vhDxXlWjWdWVL/njXEzG0Q9WE";
 const token = localStorage.getItem('token')
 const httpLink = new HttpLink({
   uri: 'http://172.17.15.42:31000/v1/graphql',
