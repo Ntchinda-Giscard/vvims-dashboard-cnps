@@ -377,6 +377,9 @@ function AddEmployee() {
                     styles={{
                         label:{
                             color: "#404040"
+                        },
+                        option:{
+                            color: "#404040"
                         }
                     }}
                 />
