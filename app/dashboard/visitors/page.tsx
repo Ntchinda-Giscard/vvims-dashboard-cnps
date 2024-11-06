@@ -126,7 +126,7 @@ function Page() {
         openEdit()
     }
 
-    // if (errVisits) return `Error: ${errVisits}`
+    if (errVisits) return `Error: ${errVisits}`
     return ( <>
     <main className="flex flex-col min-h-full min-w-full">
         <DeleteVisitorModal
