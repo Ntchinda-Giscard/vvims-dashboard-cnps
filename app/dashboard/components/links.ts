@@ -33,7 +33,7 @@ export const links = [
     {link: '/dashboard/attendance', label: 'Attendances', sub_links: [], icon: IconUserPin},
     {link: '/dashboard/leave', label: 'Leaves', sub_links: [
         {link: '/dashboard/leave', label: "All Leaves"},
-        {link: '/dashboard/leave-approvals', label: "Leave Approvals"}
+        // {link: '/dashboard/leave-approvals', label: "Leave Approvals"}
     ], icon: IconDoorExit},
     
     // {link: '/dashboard/reports', label: 'Reports', sub_links: [], icon: IconFileReport},
