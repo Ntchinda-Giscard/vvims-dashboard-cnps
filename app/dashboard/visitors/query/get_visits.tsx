@@ -71,12 +71,13 @@ subscription GetVisits($search: String = "%%", $date: timestamptz = "2100-01-01"
 
 
 export const GET_VISITS_AGG = gql`
-subscription MyQuery($search: String = "%%", $date: date = "2100-01-01") {
+
+subscription MyQuery($search: String = "%%", $date: timestamptz = "2100-01-01") {
     visits_aggregate(
       where: {
     _or: [
       {visitorByVisitor: {lastname: {_ilike: $search}}},
-      {visitorByVisitor: {firstname: {_ilike: $search}}}
+      {visitorByVisitor: {firstname: {_ilike: $search}}},
       {visitorByVisitor: {phone_number: {_ilike: $search}}}
     ],
     created_at: {_lte: $date}
