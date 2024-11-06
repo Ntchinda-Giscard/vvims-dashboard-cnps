@@ -1,0 +1,93 @@
+
+.name{
+    font-weight: 700;
+    font-size: small;
+    text-transform: capitalize;
+    color: #404040;
+    margin: 0;
+}
+
+.function{
+    font-weight: 500;
+    font-size: smaller;
+    color: rgb(126, 124, 124);
+    margin: 0;
+}
+
+
+.day{
+    font-weight: 600;
+    font-size: larger;
+    color: black;
+}
+
+.numberDays{
+    color: gray;
+    font-size: x-small;
+    margin: 0;
+}
+
+.boders{
+    border: solid 1px #c8c4c4;
+    border-radius: 5px;
+}
+
+
+.month{
+    font-weight: 600;
+    font-size: small;
+    color: black;
+}
+
+.leaveType{
+    padding-block: 10px;
+    padding-inline: 15px;
+    background: #EEEEEE;
+}
+
+.commentBox{
+    border: solid 1px #c8c4c4;
+    border-radius: 5px;
+    margin-inline: 10px;
+    margin-top: 25px;
+}
+
+.comment{
+    padding-inline: 10px;
+    font-size: small;
+    font-weight: 500;
+    color: #404040;
+    margin-bottom: 10px;
+}
+
+.type{
+    font-size: medium;
+    text-transform: lowercase;
+    color: black;
+    font-weight: 600;
+}
+
+.leavecard{
+    padding: 20px;
+    border: solid 1px #c8c4c4;
+    border-radius: 5px;
+    width: 100%;
+}
+
+.value{
+    font-weight: 700;
+    font-size: larger;
+    color: black;
+}
+
+.title{
+    font-size: smaller;
+    color: black;
+    font-weight: 700;
+}
+
+.desc{
+    font-size: x-small;
+    color: gray;
+    font-weight: 400;
+}

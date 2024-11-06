@@ -31,7 +31,11 @@ export const links = [
     {link: '/dashboard/appointment', label: 'Appointments', sub_links: [], icon: IconCalendar},
     // {link: '/dashboard/vehicle', label: 'Vehicles', sub_links: [], icon: IconCar},
     {link: '/dashboard/attendance', label: 'Attendances', sub_links: [], icon: IconUserPin},
-    // {link: '/dashboard/leave', label: 'Leaves', sub_links: [], icon: IconDoorExit},
+    {link: '/dashboard/leave', label: 'Leaves', sub_links: [
+        {link: '/dashboard/leave', label: "All Leaves"},
+        {link: '/dashboard/leave-approvals', label: "Leave Approvals"}
+    ], icon: IconDoorExit},
+    
     // {link: '/dashboard/reports', label: 'Reports', sub_links: [], icon: IconFileReport},
     // {link: '/dashboard/analytics', label: 'Analytics', sub_links: [], icon: IconAnalyze},
     // {link: '/dashboard/setting', label: 'Setting', sub_links: [], icon: IconSettings},
