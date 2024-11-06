@@ -2,7 +2,15 @@ import { gql } from "@apollo/client";
 
 export const GET_VISITS = gql`
 subscription GetVisits($search: String = "%%", $date: timestamptz = "2100-01-01", $limit: Int!, $offset: Int!) {
-  visits(limit: $limit, offset: $offset, where: {_or: [{created_at: {_lte: $date}}, {visitorByVisitor: {firstname: {_ilike: $search}, lastname: {_ilike: $search}, phone_number: {_ilike: $search}}}]}, order_by: {created_at: desc}) {
+  visits(limit: $limit, offset: $offset, 
+    where: {
+    _or: [
+      {visitorByVisitor: {lastname: {_ilike: $search}}},
+      {visitorByVisitor: {firstname: {_ilike: $search}}}
+      {visitorByVisitor: {phone_number: {_ilike: $search}}}
+    ],
+    created_at: {_lte: $date}
+    },  order_by: {created_at: desc}) {
     check_in_at
     check_out_at
     date
