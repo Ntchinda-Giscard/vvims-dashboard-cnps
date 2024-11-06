@@ -58,7 +58,7 @@ function Page() {
     const [deleteVisitor, {}] = useMutation(DELETE_VISITS)
 
     useEffect(() =>{
-        console.log(dataVisits)
+        console.log("data visits", dataVisits)
     }, [dataVisits])
 
     const handleDelete= (v: any) =>{
