@@ -370,7 +370,7 @@ function AddEmployee() {
                 <Select
                     label={"Role"}
                     placeholder="Pick role"
-                    data={['EMPLOYEE', 'ADMIN']}
+                    data={['EMPLOYEE', 'ADMIN', 'GUARD']}
                     key={form.key('role')}
                     {...form.getInputProps('role')}
                     withAsterisk
