@@ -68,3 +68,13 @@ query MyQuery {
     }
   }
 }`;
+
+
+
+
+export const GET_MONTH_LEAVE = gql`
+subscription GetLeaveMonth{
+  get_monthly_leaves {
+    accepted_leaves_count
+  }
+}`;

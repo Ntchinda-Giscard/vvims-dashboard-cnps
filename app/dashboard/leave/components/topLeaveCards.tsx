@@ -3,17 +3,17 @@ import classes from "@/app/dashboard/leave/components/styles.module.css";
 import { useQuery, useSubscription } from "@apollo/client";
 import { ThemeIcon } from "@mantine/core";
 import { IconInfoHexagon, IconCalendar, IconCalendarDot, IconUsersGroup } from "@tabler/icons-react";
-import { GET_EMPLOYEE_ON_LEAVE, GET_PENDING_LEAVES_AGG } from "../queries/queries";
+import { GET_MONTH_LEAVE, GET_PENDING_LEAVES_AGG } from "../queries/queries";
 import { useEffect } from "react";
 
 export default function TopLeaveCard(){
 
     const {data:dataPending, loading: loadPending} = useSubscription(GET_PENDING_LEAVES_AGG);
-    const {data:dataAccept, loading: loadAccept} = useQuery(GET_EMPLOYEE_ON_LEAVE);
+    const {data:dataLEaveMonth, loading: loadMonthLeave} = useSubscription(GET_MONTH_LEAVE);
 
     const data = [
         { icon: IconInfoHexagon, title: "Pending Request", desc: "Tracking leave request", value: dataPending?.leaves_aggregate?.aggregate?.count },
-        { icon: IconCalendar, title: "Total Request", desc: "Total leave of current month", value: 0 },
+        { icon: IconCalendar, title: "Total Request", desc: "Total leave of current month", value: dataLEaveMonth?.get_monthly_leaves?.[0]?.accepted_leaves_count },
         { icon: IconUsersGroup, title: "On leave", desc: "Tracking employees on leave", value: 0 },
         // { icon: IconInfoHexagon, title: "Pending Request", desc: "Tracking leave request", value: 4 },
     ];
@@ -22,7 +22,7 @@ export default function TopLeaveCard(){
 
     useEffect(() =>{
         console.log("Pending :", dataPending)
-    },[dataAccept, dataPending])
+    },[dataLEaveMonth, dataPending])
 
 
     return(
