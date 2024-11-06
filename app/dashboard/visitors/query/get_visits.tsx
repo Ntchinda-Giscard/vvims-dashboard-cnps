@@ -50,7 +50,7 @@ subscription GetVisits($search: String = "%%", $date: timestamptz = "2100-01-01"
         city
         email
       }
-      fileByBackId {
+      fileByPhoto {
         file_url
         id
       }
@@ -67,7 +67,7 @@ subscription GetVisits($search: String = "%%", $date: timestamptz = "2100-01-01"
       license
     }
   }
-}`
+}`;
 
 
 export const GET_VISITS_AGG = gql`
