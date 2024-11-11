@@ -2,8 +2,8 @@ import { gql } from "@apollo/client";
 
 
 export const INSERT_APPOINTMENT = gql`
-mutation InsertAppintment($employee_id: uuid!, $end_time: time!, $start_time: time!, $visitor_id: uuid!, $description: String) {
-  insert_appointments_one(object: {employee_id: $employee_id, end_time: $end_time, start_time: $start_time, status: PENDING, visitor_id: $visitor_id, description: $description}) {
+mutation InsertAppintment($employee_id: uuid!, $end_time: time!, $start_time: time!, $visitor_id: uuid!, $description: String, $date: date) {
+  insert_appointments_one(object: {employee_id: $employee_id, end_time: $end_time, start_time: $start_time, status: PENDING, visitor_id: $visitor_id, description: $description, date: $date}) {
     id
   }
 }`;
