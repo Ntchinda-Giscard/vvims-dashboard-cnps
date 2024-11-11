@@ -10,10 +10,11 @@ export default function TopLeaveCard(){
 
     const {data:dataPending, loading: loadPending} = useSubscription(GET_PENDING_LEAVES_AGG);
     const {data:dataLEaveMonth, loading: loadMonthLeave} = useSubscription(GET_MONTH_LEAVE);
+    const {data: dataAgg, loading: loadAgg, error: errAgg} = useSubscription(GET_MONTH_LEAVE);
 
     const data = [
         { icon: IconInfoHexagon, title: "Pending Request", desc: "Tracking leave request", value: dataPending?.leaves_aggregate?.aggregate?.count },
-        { icon: IconCalendar, title: "Total Request", desc: "Total leave of current month", value: dataLEaveMonth?.get_monthly_leaves?.[0]?.accepted_leaves_count },
+        { icon: IconCalendar, title: "Total Request", desc: "Total leave", value: dataAgg?.leaves_aggregate?.aggregate?.count },
         { icon: IconUsersGroup, title: "On leave", desc: "Tracking employees on leave", value: 0 },
         // { icon: IconInfoHexagon, title: "Pending Request", desc: "Tracking leave request", value: 4 },
     ];

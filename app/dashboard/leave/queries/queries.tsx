@@ -69,6 +69,15 @@ query MyQuery {
   }
 }`;
 
+export const GET_LEAVES_EMPL = gql`
+subscription GetLeavesAgg {
+  leaves_aggregate {
+    aggregate {
+      count
+    }
+  }
+}`;
+
 
 
 

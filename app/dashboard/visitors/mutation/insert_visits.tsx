@@ -21,7 +21,7 @@ mutation AcceptVisit($id: uuid!) {
   update_visits_by_pk(pk_columns: {id: $id}, _set: {status: ACCEPTED, check_in_at: now, date: now}) {
     id
   }
-}`
+}`;
 
 
 export const REJECT_VISITS = gql`

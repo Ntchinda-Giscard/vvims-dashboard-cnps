@@ -4,12 +4,14 @@ import classes from './StatsGridIcons.module.css';
 import { useSubscription } from '@apollo/client';
 import { TODAYS_APP, GET_COMPLETED_APP, UPCOMING_APPOINMENT } from '../query/query';
 import { useEffect } from 'react';
+import { GET_MONTH_LEAVE } from '../../leave/queries/queries';
 
 
 export default function StatsGridIcons() {
-  const {data: dataToday } = useSubscription(TODAYS_APP)
-  const {data: dataCompleted} = useSubscription(GET_COMPLETED_APP)
-  const {data: dataUpcoming} = useSubscription(UPCOMING_APPOINMENT)
+  const {data: dataToday } = useSubscription(TODAYS_APP);
+  const {data: dataCompleted} = useSubscription(GET_COMPLETED_APP);
+  const {data: dataUpcoming} = useSubscription(UPCOMING_APPOINMENT);
+  
 
   useEffect(() =>{
 
