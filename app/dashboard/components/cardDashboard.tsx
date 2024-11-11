@@ -1,10 +1,10 @@
-import { Badge, Group, Paper } from '@mantine/core'
+import { Badge, Group, Paper, ThemeIcon } from '@mantine/core'
 import Image from 'next/image'
 import { ReactElement } from 'react'
 import classes from "@/app/dashboard/components/css/dashboard.module.css";
 import { Poppins } from "next/font/google";
 import cx from 'clsx'
-import { IconChevronUp, IconChevronDown, Icon } from '@tabler/icons-react';
+import { IconInfoHexagon, IconCalendar, IconUserShare, IconUsersGroup } from "@tabler/icons-react";
 
 const font_heading = Poppins({ subsets: ["latin"], weight:["500"] });
 const font_amnt = Poppins({ subsets: ["latin"], weight:["700"] });
@@ -18,29 +18,33 @@ interface dashboard_card{
     img: string
 }
 
+const data = [
+    { icon: IconInfoHexagon, title: "Pending Request", desc: "Tracking leave request", value: 0 },
+    { icon: IconCalendar, title: "Total Request", desc: "Total leave of current month", value: 0},
+    { icon: IconUsersGroup, title: "On leave", desc: "Tracking employees on leave", value: 0 },
+    // { icon: IconInfoHexagon, title: "Pending Request", desc: "Tracking leave request", value: 4 },
+];
+
 function CardDashboard({title, amount, perc, bg_img, img}: dashboard_card) {
     return ( <>
-    <Paper 
-        withBorder
-        radius="md"
-        w={350}
-    >
-        <Group justify={'space-between'}>
-            <Group p={10} gap={10}>
-                <Image src={img} alt="img" height={75} width={75} />
-                <p className={cx([classes.cardTitle, font_heading])}> {title} </p>
-            </Group>
-            <Image src={bg_img} alt='img' />
-        </Group>
-        <Group justify="flex-start" p={10} pb={0}>
-            <p className={cx([font_amnt.className, classes.amount])}> {amount} </p>
-            <Badge leftSection={ perc > 0 ?<IconChevronUp /> : <IconChevronDown />} variant="light" color={ perc > 0 ? "#16DBCC" : perc < 0 ? 'red' : ''} size="lg"  radius="md">  {perc}% </Badge>
-        </Group>
-        {/* <Group p={10} pt={0}>
-            <p className={cx([classes.perc, font_perc.className])}> {perc}% </p>
-            <p className={cx([classes.percDesc, font_perc.className])}> {perc > 0 ? "Total Increase" : perc < 0  ? "Total decrease" : "Equal"} </p>
-        </Group> */}
-    </Paper>
+        <div className="flex flex-col md:flex-row gap-2">
+        {
+            data.map((item, index) => (
+                <div key={item?.desc} className={classes.card}>
+                    <div className="flex flex-row justify-between items-center">
+                        <ThemeIcon radius="xl" size="lg" color="rgba(247, 247, 247, 1)">
+                            <item.icon color="black" stroke={1} style={{ width: '60%', height: '60%' }} />
+                        </ThemeIcon>
+                        <span className={classes.value}> {item?.value} </span>
+                    </div>
+                    <div className="flex flex-col">
+                        <p className={classes.title}> {item?.title} </p>
+                        <p className={classes.desc}> {item?.desc} </p>
+                    </div>
+                </div>
+            ))
+        }
+    </div>
 
     </> );
 }

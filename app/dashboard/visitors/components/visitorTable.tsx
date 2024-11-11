@@ -7,10 +7,15 @@ import classes from "@/app/dashboard/view-employees/table.module.css";
 
 export default function VisitorTable({datas, onEdit, onCheckIn, onCheckOut, onView, onAccept, onReject, onDelete}:any) {
   const [scrolled, setScrolled] = useState(false)
-  const dateConverter=(date: any) =>{
-    if(date  === null) return '--:--:--'
-    const new_date = new Date(date).toLocaleTimeString('en-GB', {hour12: false})
-    return new_date
+  const dateConverter=(timeString: any) =>{
+    if(timeString  === null) return '--:--'
+    const [hour, minute] = timeString.split(':');
+
+    // Convert to WAT (UTC+1)
+    const watHour = (parseInt(hour) + 1) % 24; // Handle hour wrap-around
+
+    // Return formatted WAT time
+    return `${watHour.toString().padStart(2, '0')}:${minute}`;
   }
   const rows = datas?.map((data: {
     date: ReactNode;
