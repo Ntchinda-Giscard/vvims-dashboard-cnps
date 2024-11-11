@@ -6,7 +6,7 @@ import { useSelector } from 'react-redux';
 import { GET_EMPLY } from '../../add-employee/query/get_all_empl';
 import { useEffect, useState } from 'react';
 import { GET_ALL_VISITORS } from '../../visitors/query/get_all_visitors';
-import { TimeInput } from '@mantine/dates';
+import { DatePickerInput, TimeInput } from '@mantine/dates';
 import { IconClock } from '@tabler/icons-react';
 import { INSERT_APPOINTMENT, INSERT_APPOINTMENT_WITH_VISITOR } from '../mutation/add_appointments';
 import toast from 'react-hot-toast';
@@ -25,12 +25,14 @@ export default function AddAppoinmentModal({opened, close}: any) {
       visitors: null,
       start_time: null,
       end_time: null,
+      date: null
     },
 
     validate: {
       employee: (value) => ((value) ? null : 'Invalid employee'),
       start_time: (value) => ((value) ? null : 'Invalid time'),
       end_time: (value) => ((value) ? null : 'Invalid time'),
+      date: (value) => ((value) ? null : 'Invalid date'),
     },
   });
 
@@ -147,6 +149,24 @@ export default function AddAppoinmentModal({opened, close}: any) {
                       color: "#404040"
                   }
               }}
+            />
+            <DatePickerInput
+              label={"Date"}
+              placeholder="Pick date"
+              key={form.key('date')}
+              {...form.getInputProps('date')}
+              styles={{
+                label:{
+                    color: "#404040"
+                },
+                calendarHeader:{
+                    color: "#000"
+                },
+                calendarHeaderControl:{
+                    color: "#000"
+                }
+            }}
+
             />
             <Group grow>
               <TimeInput
