@@ -103,6 +103,13 @@ export default function AddAppoinmentModal({opened, close}: any) {
           id_card_number: values?.id_number,
           description: values?.description,
           date: values?.date,
+        },
+        onCompleted: () =>{
+          close()
+          toast.success("Operation sucessful")
+        },
+        onError: (err) =>{
+          toast.error(`${err.message}`)
         }
       })
     }
@@ -260,7 +267,7 @@ export default function AddAppoinmentModal({opened, close}: any) {
           </Stack>
 
           <Group justify="flex-end" mt="md" grow>
-            <Button bg={"#16DBCC"} loading={loading}  type="submit">Submit</Button>
+            <Button bg={"#16DBCC"} loading={loading || loadApp}  type="submit">Submit</Button>
             <Button bg={"red"} onClick={close} >Cancel</Button>
           </Group>
         </form>
