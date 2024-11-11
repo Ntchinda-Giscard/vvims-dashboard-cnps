@@ -58,17 +58,6 @@ subscription MyQuery {
 }`;
 
 
-export const GET_EMPLOYEE_ON_LEAVE = gql`
-query MyQuery {
-  employees {
-    leaves_aggregate(where: {status: {_eq: ACCEPTED}}) {
-      aggregate {
-        count
-      }
-    }
-  }
-}`;
-
 export const GET_LEAVES_EMPL = gql`
 subscription GetLeavesAgg {
   leaves_aggregate {
@@ -85,5 +74,13 @@ export const GET_MONTH_LEAVE = gql`
 subscription GetLeaveMonth{
   get_monthly_leaves {
     accepted_leaves_count
+  }
+}`;
+
+
+export const GET_EMPLOYEE_ON_LEAVE = gql`
+query MyQuery2 {
+  getTotalEmployeeOnLeave {
+    total
   }
 }`;
