@@ -102,6 +102,7 @@ export default function AddAppoinmentModal({opened, close}: any) {
           phone_number: values?.phone_number,
           id_card_number: values?.id_number,
           description: values?.description,
+          date: values?.date,
         }
       })
     }
