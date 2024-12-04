@@ -138,6 +138,7 @@ function AddEmployee() {
                 close()
                 toast.success("Operation successful")
                 console.log("Employee inserted", data)
+                form.reset()
             },
             onError: (err) =>{
                 close()
