@@ -13,5 +13,9 @@ subscription MyQuery($id: uuid!) {
   employees_by_pk(id: $id) {
     id
     password_change_at
+    file {
+      file_url
+      id
+    }
   }
 }`;
