@@ -19,12 +19,13 @@ import { useDispatch } from "react-redux";
 import { addVisitor } from "./slices/visitorSlices";
 import { DELETE_VISITS } from "./mutation/delete_visits";
 import DeleteVisitorModal from "./components/deleteVisitModal";
+import TopVisitorCard from "@/app/dashboard/visitors/components/topVisitorCards";
 
 const poppins = Poppins({ subsets: ["latin"], weight:["400"] });
 
 
 function Page() {
-    const router = useRouter() 
+    const router = useRouter()
     const pathname = usePathname()
     const dispatch = useDispatch()
     const [addOpenedVisitor, { open: openVisitor, close: closeVisitor }] = useDisclosure(false);
@@ -35,8 +36,8 @@ function Page() {
     const [date, setDate] = useState( new Date('2100-01-01'))
     const [editValue, setEditValue] = useState(null)
 //   const user = useSelector((state: any) => state.auth.userInfo);
-  const [search, setSearch] = useState('');
-  const [deleteData, setDeleteData] = useState();
+    const [search, setSearch] = useState('');
+    const [deleteData, setDeleteData] = useState();
     const {data: dataVisits, loading: loadVisits, error: errVisits} = useSubscription(GET_VISITS,{
         variables:{
             limit: itemsPerPage,
@@ -58,7 +59,7 @@ function Page() {
     const [deleteVisitor, {}] = useMutation(DELETE_VISITS)
 
     useEffect(() =>{
-        console.log("data visits", dataVisits)
+        console.log(dataVisits)
     }, [dataVisits])
 
     const handleDelete= (v: any) =>{
@@ -126,91 +127,92 @@ function Page() {
         openEdit()
     }
 
-    if (errVisits) return `Error: ${errVisits}`
+    // if (errAgg) return `Error: ${errAgg}`
     return ( <>
-    <main className="flex flex-col min-h-full min-w-full">
-        <DeleteVisitorModal
-            data={deleteData}
-            opened = {openedDelete}
-            close={closeDelete}
-        />
-        <AddVisitor 
-            opened = {addOpenedVisitor}
-            close={closeVisitor}
-        />
-        <EditVisitor
-            opened={editOpenedVisitor}
-            close={closeEdit}
-            data={editValue}
-        />
-        <div className="flex md:flex-row flex-col justify-between">
-            <p style={{fontWeight: 800, fontSize: "large", color: "#404040"}}> Visitors </p>
-            <Button
-                onClick={openVisitor}
-                bg={"#16DBCC"} 
-                leftSection={<IconPlus size={14} />}
-                >
-                Add Visitor
-            </Button>
-        </div>
-        <Paper radius="md" shadow="md" p="md" mt="lg" >
-            <div className="flex flex-col gap-3 md:gap-0 md:flex-row justify-between">
-                <TextInput
-                    value={search}
-                    onChange={(event) => setSearch(event.currentTarget.value)}
-                    leftSection={<IconSearch  style={{ width: rem(16), height: rem(16) }} />}
-                    placeholder="search"
-                />
-                <DateInput
-                //@ts-ignore
-                    value={date}
-                    //@ts-ignore
-                    onChange={setDate}
-                    placeholder="Date input"
-                    leftsection={<IconCalendar style={{ width: rem(16), height: rem(16) }} />}
-                    clearable
-                    styles={{
-                        label:{
-                            color: "#404040"
-                        },
-                        calendarHeader:{
-                            color: "#000"
-                        },
-                        calendarHeaderControl:{
-                            color: "#000"
-                        }
-                    }}
-                />
-            </div>
-            {
-                loadVisits || errVisits ?
-                <FullWidthSkeletonStack /> :
-                <VisitorTable 
-                    datas={dataVisits?.visits}
-                    onAccept={(v:any) =>handleAcceptVisit(v)}
-                    onReject={(v:any) => handleRejectVisit(v)}
-                    onCheckOut={(v:any) =>handleCheckOutVisit(v)}
-                    onEdit={(v:any) =>handleEdit(v)}
-                    onView={(v: any) => handleView(v) }
-                    onDelete={(v:any) =>handleDelete(v)}
-            />}
-            <div className="flex justify-center md:justify-between">
-            {
-              errAgg || loadAgg ? null :
-              <p className={poppins.className} style={{color: "#007FFF", fontSize: "small"}}>
-              Displaying { dataVisits?.visits?.length ? dataVisits?.visits?.length*activePage : 0} of {dataAgg?.visits_aggregate?.aggregate?.count} visits.
-            </p>}
-          {
-            errAgg || loadAgg ? null :
-            <FootPage 
-              activePage={activePage}
-              onPage={(v: any) => setPage(v)}
-              total={Math.ceil(dataAgg?.visits_aggregate?.aggregate?.count/itemsPerPage)}
+        <main className="flex flex-col min-h-full min-w-full">
+            <DeleteVisitorModal
+                data={deleteData}
+                opened = {openedDelete}
+                close={closeDelete}
             />
-          }
-          </div>
-        </Paper>
-    </main>
+            <AddVisitor
+                opened = {addOpenedVisitor}
+                close={closeVisitor}
+            />
+            <EditVisitor
+                opened={editOpenedVisitor}
+                close={closeEdit}
+                data={editValue}
+            />
+            <div className="flex md:flex-row flex-col justify-between">
+                <p style={{fontWeight: 800, fontSize: "large", color: "#404040"}}> Visitors </p>
+                <Button
+                    onClick={openVisitor}
+                    bg={"#16DBCC"}
+                    leftSection={<IconPlus size={14} />}
+                >
+                    Add Visitor
+                </Button>
+            </div>
+            <TopVisitorCard />
+            <Paper radius="md" shadow="md" p="md" mt="lg" >
+                <div className="flex flex-col gap-3 md:gap-0 md:flex-row justify-between">
+                    <TextInput
+                        value={search}
+                        onChange={(event) => setSearch(event.currentTarget.value)}
+                        leftSection={<IconSearch  style={{ width: rem(16), height: rem(16) }} />}
+                        placeholder="search"
+                    />
+                    <DateInput
+                        //@ts-ignore
+                        value={date}
+                        //@ts-ignore
+                        onChange={setDate}
+                        placeholder="Date input"
+                        leftsection={<IconCalendar style={{ width: rem(16), height: rem(16) }} />}
+                        clearable
+                        styles={{
+                            label:{
+                                color: "#404040"
+                            },
+                            calendarHeader:{
+                                color: "#000"
+                            },
+                            calendarHeaderControl:{
+                                color: "#000"
+                            }
+                        }}
+                    />
+                </div>
+                {
+                    loadVisits || errVisits ?
+                        <FullWidthSkeletonStack /> :
+                        <VisitorTable
+                            datas={dataVisits?.visits}
+                            onAccept={(v:any) =>handleAcceptVisit(v)}
+                            onReject={(v:any) => handleRejectVisit(v)}
+                            onCheckOut={(v:any) =>handleCheckOutVisit(v)}
+                            onEdit={(v:any) =>handleEdit(v)}
+                            onView={(v: any) => handleView(v) }
+                            onDelete={(v:any) =>handleDelete(v)}
+                        />}
+                <div className="flex justify-center md:justify-between">
+                    {
+                        errAgg || loadAgg ? null :
+                            <p className={poppins.className} style={{color: "#007FFF", fontSize: "small"}}>
+                                Displaying { dataVisits?.visits?.length ? dataVisits?.visits?.length*activePage : 0} of {dataAgg?.visits_aggregate?.aggregate?.count} visits.
+                            </p>}
+                    {
+                        errAgg || loadAgg ? null :
+                            <FootPage
+                                activePage={activePage}
+                                onPage={(v: any) => setPage(v)}
+                                total={Math.ceil(dataAgg?.visits_aggregate?.aggregate?.count/itemsPerPage)}
+                            />
+                    }
+                </div>
+            </Paper>
+        </main>
     </> );
 }
 
