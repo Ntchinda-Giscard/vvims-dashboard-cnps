@@ -3,20 +3,19 @@ import classes from "@/app/dashboard/leave/components/styles.module.css";
 import { useQuery, useSubscription } from "@apollo/client";
 import { ThemeIcon } from "@mantine/core";
 import { IconInfoHexagon, IconCalendar, IconCalendarDot, IconUsersGroup } from "@tabler/icons-react";
-import { GET_EMPLOYEE_ON_LEAVE, GET_LEAVES_EMPL, GET_MONTH_LEAVE, GET_PENDING_LEAVES_AGG } from "../queries/queries";
+import {GET_LEAVE_ACCEPTED, GET_MONTH_LEAVE, GET_PENDING_LEAVES_AGG} from "../queries/queries";
 import { useEffect } from "react";
 
 export default function TopLeaveCard(){
 
     const {data:dataPending, loading: loadPending} = useSubscription(GET_PENDING_LEAVES_AGG);
-    const {data:dataLEaveMonth, loading: loadMonthLeave} = useSubscription(GET_MONTH_LEAVE);
-    const {data: dataAgg, loading: loadAgg, error: errAgg} = useSubscription(GET_LEAVES_EMPL);
-    const {data: dataEmplOnLeave, loading: loadEmlLeave} = useQuery(GET_EMPLOYEE_ON_LEAVE);
+    const {data:dataLEaveMonth, loading: loadMonthLeave} = useQuery(GET_MONTH_LEAVE);
+    const {data: dataAgg, loading: loadAgg} = useQuery(GET_LEAVE_ACCEPTED);
 
     const data = [
         { icon: IconInfoHexagon, title: "Pending Request", desc: "Tracking leave request", value: dataPending?.leaves_aggregate?.aggregate?.count },
-        { icon: IconCalendar, title: "Total Request", desc: "Total leave", value: dataAgg?.leaves_aggregate?.aggregate?.count },
-        { icon: IconUsersGroup, title: "On leave", desc: "Tracking employees on leave", value: dataEmplOnLeave?.getTotalEmployeeOnLeave?.total },
+        { icon: IconCalendar, title: "Total Request", desc: "Tracking total leave", value: dataLEaveMonth?.leaves_aggregate?.aggregate?.count },
+        { icon: IconUsersGroup, title: "On leave", desc: "Tracking employees on leave", value: dataAgg?.leaves_aggregate?.aggregate?.count },
         // { icon: IconInfoHexagon, title: "Pending Request", desc: "Tracking leave request", value: 4 },
     ];
 

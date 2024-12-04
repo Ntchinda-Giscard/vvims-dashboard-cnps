@@ -70,7 +70,7 @@
 .leavecard{
     padding: 20px;
     border: solid 1px #c8c4c4;
-    border-radius: 5px;
+    border-radius:15px;
     width: 100%;
 }
 
@@ -91,3 +91,31 @@
     color: gray;
     font-weight: 400;
 }
+
+
+.cardTitle{
+    font-size: large;
+    color: black;
+    font-weight: 700;
+}
+
+.leaveTypes{
+    font-size: small;
+    font-weight: 500;
+    color: black;
+    text-transform: lowercase;
+}
+
+.leaveLabel{
+    font-size: small;
+    font-weight: 500;
+    color: var(--mantine-color-gray-4);
+    text-transform: lowercase;
+}
+
+.progressSection {
+    &:not(:first-of-type) {
+        border-top-right-radius: 10px;
+        border-bottom-right-radius: 10px;
+    }
+  }

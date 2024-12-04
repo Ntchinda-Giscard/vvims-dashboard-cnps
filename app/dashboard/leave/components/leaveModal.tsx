@@ -178,11 +178,11 @@ export default function LeaveModal({opened, close, leave}: any){
                     <Group grow mt={"md"} px={15} py={15}>
                         <Button 
                             disabled={data?.leave_approval?.[0]?.approval_status === "ACCEPTED"}
-                            onClick={handleAccept} loading={loadAccept} color="red"  radius="md">Accept</Button>  
+                            onClick={handleAccept} loading={loadAccept} color="#16DBCC"  radius="md">Accept</Button>
                         <Button
                             disabled={data?.leave_approval?.[0]?.approval_status === "REJECTED"}
                             onClick={open}
-                            loading={loadDecline} color="#16DBCC"  radius="md">Reject</Button>
+                            loading={loadDecline} color="red"  radius="md">Reject</Button>
                     </Group>
 
                     
@@ -190,7 +190,7 @@ export default function LeaveModal({opened, close, leave}: any){
             {/* Modal content */}
             <Dialog position={{ top: 20, left: "30%"}} opened={openedDialog} withCloseButton onClose={closeDialog} size="lg" radius="md">
         <Text size="sm" mb="xs" fw={500}>
-          Reseans for refusal
+          Reason for refusal
         </Text>
 
         <Group align="flex-end">

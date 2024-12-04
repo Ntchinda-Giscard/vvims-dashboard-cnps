@@ -1,6 +1,6 @@
 "use client"
 import { useMutation, useQuery } from '@apollo/client';
-import { Modal, Button, Select, Textarea, Group, rem } from '@mantine/core';
+import { Modal, Button, Select, Textarea, Loader, rem, FileInput } from '@mantine/core';
 import { DateInput } from '@mantine/dates';
 import { useForm } from '@mantine/form';
 import { GET_LEAVE_TYPE } from '../queries/queries';
@@ -9,6 +9,8 @@ import { INSERT_LEAVE } from '../mutation/mutations';
 import toast from 'react-hot-toast';
 import { useSelector } from 'react-redux';
 import { IconCalendar } from '@tabler/icons-react';
+import axios from 'axios';
+import FileUpload from "@/app/dashboard/leave/components/fileUploader";
 
 export default function AddLeaveManagement({opened, close}: any) {
 
@@ -16,6 +18,8 @@ export default function AddLeaveManagement({opened, close}: any) {
     const [insertLeave, {loading: loadInsert}] = useMutation(INSERT_LEAVE);
     const [types, setTypes] = useState([]);
     const user = useSelector((state: any) => state.auth.userInfo);
+    const [value, setValue] = useState<File | null>(null);
+    const [uploading, setUploading] = useState(false)
 
     const form = useForm({
         mode: 'uncontrolled',
@@ -131,14 +135,15 @@ export default function AddLeaveManagement({opened, close}: any) {
                     label="Comment"
                     placeholder="comment..."
                     withAsterisk
-                        key={form.key('comment')}
-                        {...form.getInputProps('comment')}
-                        styles={{
+                    key={form.key('comment')}
+                    {...form.getInputProps('comment')}
+                    styles={{
                             label:{
                                 color: "#404040"
                             },
                         }}
                 />
+                {/*<FileUpload />*/}
             </div>
             <div className=" mt-5 flex col gap-2 md:flex-row flex-grow" >
                 <Button loading={loadInsert} className="grow" type="submit" color={"#16DBCC"}>

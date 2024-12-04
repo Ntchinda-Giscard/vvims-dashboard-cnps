@@ -58,11 +58,13 @@ subscription MyQuery {
 }`;
 
 
-export const GET_LEAVES_EMPL = gql`
-subscription GetLeavesAgg {
-  leaves_aggregate {
-    aggregate {
-      count
+export const GET_EMPLOYEE_ON_LEAVE = gql`
+query MyQuery {
+  employees {
+    leaves_aggregate(where: {status: {_eq: ACCEPTED}}) {
+      aggregate {
+        count
+      }
     }
   }
 }`;
@@ -71,16 +73,57 @@ subscription GetLeavesAgg {
 
 
 export const GET_MONTH_LEAVE = gql`
-subscription GetLeaveMonth{
-  get_monthly_leaves {
-    accepted_leaves_count
-  }
-}`;
+  query MyQuery {
+    leaves_aggregate {
+      aggregate {
+        count
+      }
+    }
+  }`;
 
 
-export const GET_EMPLOYEE_ON_LEAVE = gql`
-query MyQuery2 {
-  getTotalEmployeeOnLeave {
-    total
-  }
-}`;
+export const GET_LEAVE_ACCEPTED = gql`
+  query MyQuery {
+    leaves_aggregate(where: {status: {_eq: ACCEPTED}}) {
+      aggregate {
+        count
+      }
+    }
+  }`;
+
+
+export const GET_AGG_BERIEVED = gql`
+    query MyQuery($employee_id: uuid!) {
+        leaves_aggregate(where: {leave_type: {_eq: BEREAVE}, employee_id: {_eq: $employee_id}}) {
+            aggregate {
+                count
+            }
+        }
+    }`;
+
+export const GET_AGG_MAT = gql`
+  query MyQuery($employee_id: uuid!) {
+    leaves_aggregate(where: {leave_type: {_eq: MATERNITY}, employee_id: {_eq: $employee_id}}) {
+      aggregate {
+        count
+      }
+    }
+  }`;
+
+export const GET_AGG_SICK = gql`
+  query MyQuery($employee_id: uuid! ) {
+    leaves_aggregate(where: {leave_type: {_eq: SICK}, employee_id: {_eq: $employee_id}}) {
+      aggregate {
+        count
+      }
+    }
+  }`;
+
+export const GET_AGG_OTH = gql`
+  query MyQuery($employee_id: uuid = "") {
+    leaves_aggregate(where: {leave_type: {_eq: OTHER}, employee_id: {_eq: $employee_id}}) {
+      aggregate {
+        count
+      }
+    }
+  }`;
