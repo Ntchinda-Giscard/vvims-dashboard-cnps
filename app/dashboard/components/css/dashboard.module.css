@@ -25,7 +25,8 @@
 }
 
 .titleCars{
-    color: #404040;
+    color: black;
+    font-weight: 700;
     font-size: large;
     text-transform: capitalize;
     margin-bottom: 10px;
@@ -33,27 +34,308 @@
 
 .cmake{
     color: #C9C9C9;
-    font-size: medium;
+    font-size: x-small;
     text-transform: capitalize;
 }
 
 .license{
-    font-size: medium;
-    color: #386BF6;
+    font-size: x-small;
+    color: var(--mantine-color-blue-6);
     text-transform: uppercase;
 }
 
 .time{
-    font-size: smaller;
+    font-size: x-small;
     color: #404040;
     text-transform: lowercase;
 }
 
-
-
 .card{
+    padding: 20px;
+    border: solid 1px #DEE2E6;
+    border-radius: 15px;
+    width: 100%;
+    height: 100%;
+}
+
+
+.name{
+    font-weight: 700;
+    font-size: small;
+    text-transform: capitalize;
+    color: #404040;
+    margin: 0;
+}
+
+.function{
+    font-weight: 500;
+    font-size: smaller;
+    color: rgb(126, 124, 124);
+    margin: 0;
+}
+
+
+.day{
+    font-weight: 600;
+    font-size: larger;
+    color: black;
+}
+
+.numberDays{
+    color: gray;
+    font-size: x-small;
+    margin: 0;
+}
+
+.boders{
+    border: solid 1px #c8c4c4;
+    border-radius: 5px;
+}
+
+
+.month{
+    font-weight: 600;
+    font-size: small;
+    color: black;
+}
+
+.leaveType{
+    padding-block: 10px;
+    padding-inline: 15px;
+    background: #EEEEEE;
+}
+
+.commentBox{
+    border: solid 1px #c8c4c4;
+    border-radius: 5px;
+    margin-inline: 10px;
+    margin-top: 25px;
+}
+
+.comment{
+    padding-inline: 10px;
+    font-size: small;
+    font-weight: 500;
+    color: #404040;
+    margin-bottom: 10px;
+}
+
+.type{
+    font-size: medium;
+    text-transform: lowercase;
+    color: black;
+    font-weight: 600;
+}
+
+.leavecard{
     padding: 20px;
     border: solid 1px #c8c4c4;
     border-radius: 5px;
     width: 100%;
+}
+
+.value{
+    font-weight: 700;
+    font-size: larger;
+    color: black;
+}
+
+.title{
+    font-size: small;
+    color: black;
+    font-weight: 700;
+}
+
+.desc{
+    font-size: x-small;
+    color: gray;
+    font-weight: 400;
+}
+
+
+.taskStat{
+    font-size: medium;
+    color: black;
+    font-weight: 800;
+    text-align: center;
+}
+
+
+
+.dateEvent{
+    background: #E7EBEE;
+    border-radius: 10px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: fit-content;
+    width: fit-content;
+    padding-block: 8px;
+    padding-inline: 12px;
+}
+
+.dateSpan{
+
+    font-weight: 700;
+    color: black;
+    font-size: smaller;
+}
+
+.eventTitle{
+    font-weight: 700;
+    color: black;
+    font-size: smaller;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    width: 100px;
+}
+
+.eventDesc{
+    font-weight: 700;
+    color: #B8B9BA;
+    font-size: x-small;
+
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: 100px;
+    box-sizing: border-box;
+}
+
+.taskEventTitle{
+    color: black;
+    font-weight: 700;
+    font-size: large;
+    margin-bottom: 15px;
+}
+
+
+
+
+.appointeContainer{
+    background-color: #F8FAFB;
+    border-radius: 15px;
+    padding: 5px;
+
+}
+
+.appointeeName{
+    color: black;
+    font-size: x-small;
+    font-weight: 700;
+}
+
+.appointeeReason{
+    color: #B8B9BA;
+    font-size: xx-small;
+    font-weight: 400;
+}
+
+.overviewCard{
+    background-color: #CBF2FF;
+    padding: 15px;
+    display: flex;
+    flex-direction: column;
+    justify-content: start;
+    border-radius: 15px;
+    margin-top: 18px;
+}
+
+.overviewValue{
+    font-weight: 700;
+    font-size: medium;
+    color: black;
+}
+
+.overviewLabel{
+    font-weight: 400;
+    font-size: smaller;
+    color: #64646C;
+}
+
+
+.noDataTitle{
+    color: black;
+    font-weight: 700;
+    font-size: large;
+    text-align: center;
+    text-transform: capitalize;
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+.noDataDesc{
+    color: #404040;
+    font-weight: 400;
+    text-align: center;
+    font-size: small;
+}
+
+
+.eventTitleSpan{
+    color: black;
+    font-weight: 700;
+    font-size: medium;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    padding-left: 10px;
+    border-top-left-radius: 2px;
+    border-bottom-left-radius: 2px;
+}
+.eventCard{
+    border-radius: 13px;
+}
+
+.eventTime{
+    color: #84898d;
+    font-weight: 400;
+    font-size: smaller;
+}
+
+/* Style the container */
+.fileinputcontainer {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+/* Style the file input */
+.fileinput {
+    display: block;
+    padding: 5px;
+    border: 1px solid #007bff; /* Blue outline */
+    border-radius: 12px;
+    background-color: #f8f9fa;
+    color: #333;
+    font-size: 16px;
+    cursor: pointer;
+    outline: none;
+    width: 100%;
+    max-width: 100%;
+}
+
+/* Add a hover effect */
+.fileinput:hover {
+    border-color: #0056b3;
+    background-color: #e9ecef;
+}
+
+/* Add focus styling */
+.fileinput:focus {
+    border-color: #0056b3;
+    box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
+    outline: none;
+}
+
+.fileinputlabel{
+    color: black;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+.fileinputlabel:hover {
+    color: #0056b3;
 }

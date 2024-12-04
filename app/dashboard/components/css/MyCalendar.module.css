@@ -1,0 +1,10 @@
+.day{
+    border-radius: 50px;
+    background-color: #f0f0f0;
+    &[data-today] {
+        color: #333;
+    }
+    &[data-selected] {
+        background-color: #F5F5F5;
+    }
+}

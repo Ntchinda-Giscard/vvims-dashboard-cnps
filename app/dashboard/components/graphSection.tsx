@@ -6,6 +6,8 @@ import classes from "@/app/dashboard/components/css/dashboard.module.css"
 import cx from "clsx"
 import { useSubscription } from "@apollo/client";
 import { GET_VISITS_STAT } from "../queries/get_all_visits";
+import AttendanceOverviewBarChart from "./attendanceBarChart";
+import VisitorChart from "./visitorChart";
 
 
 
@@ -19,48 +21,35 @@ function GraphSection() {
     },[dataVisitStat])
     return ( <>
 
-    <Paper withBorder pr={20} pb={15} w={"100%"}>
+    <Paper withBorder radius="lg" pl={18} pr={18} pt={15} w={"100%"}>
         <Group p={10} justify="space-between">
-            <p className={cx([classes.titleCars])}> Entry Statistics </p>
+            <p className={cx([classes.titleCars])}> Weekly Entry Statistics </p>
             <Group>
                 <SegmentedControl
                     value={value}
                     onChange={setValue}
                     data={[
                         { label: 'Visitors', value: 'vi' },
-                        { label: 'Vehicles', value: 've' },
+                        // { label: 'Vehicles', value: 've' },
+                        {label: "Attendance", value: 'att'}
                     ]}
                 />
-                <Select
+                {/* <Select
                     placeholder="Pick value"
-                    data={['This month', 'Today', 'This week']}
-                />
+                    data={['Month', 'Today', 'Week']}
+                    w={100}
+                /> */}
             </Group>
         </Group>
         {
-            value === 'vi' ?
-            <LineChart
-            h={300}
-            data={dataVisitStat?.get_visits_stat
-                }
-            dataKey="day"
-            series={[
-                { name: 'visits_per_day', color: '#16DBCC' },
-            ]}
-            curveType="natural"
-            withDots={false}
-        />
+            value === 'att' ?
+            <AttendanceOverviewBarChart />
         :
-        <LineChart
-            h={300}
-            data={[]}
-            dataKey="day"
-            series={[
-                { name: 'visits_per_day', color: '#16DBCC' },
-            ]}
-            curveType="natural"
-            withDots={false}
-        />
+
+        value === 'vi' ?
+        <VisitorChart /> :
+        <VisitorChart /> 
+
         }
     </Paper>
     

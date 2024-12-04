@@ -18,7 +18,38 @@
 }
 
 .abrev{
-    font-size: x-large;
+    font-size: large;
     color: #fff;
     font-weight: 700;
+}
+
+.notif{
+    font-weight: 600;
+    color: black;
+    font-size: medium;
+    padding-inline: 10px;
+    padding-top: 5px;
+}
+
+.notif_title{
+    font-size: smaller;
+    color: black;
+    font-weight: 500;
+    text-transform: capitalize;
+    /* white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    box-sizing: border-box; */
+}
+
+.notif_time{
+    font-size: x-small;
+    color: rgb(112, 110, 110);
+    font-weight: 400;
+}
+
+.notif_desc{
+    font-size: smaller;
+    color: rgb(112, 110, 110);
+    font-weight: 400;
 }
