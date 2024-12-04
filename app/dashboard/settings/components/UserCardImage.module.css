@@ -1,0 +1,41 @@
+.card {
+    background-color: var(--mantine-color-body);
+}
+
+.avatar {
+    border: 2px solid var(--mantine-color-body);
+}
+
+
+/* Style the container */
+.file-input-container {
+    margin: 20px;
+}
+
+/* Style the file input */
+.file-input {
+    display: block;
+    padding: 10px;
+    border: 2px solid #007bff; /* Blue outline */
+    border-radius: 5px;
+    background-color: #f8f9fa;
+    color: #333;
+    font-size: 16px;
+    cursor: pointer;
+    outline: none;
+    width: 100%;
+    max-width: 300px;
+}
+
+/* Add a hover effect */
+.file-input:hover {
+    border-color: #0056b3;
+    background-color: #e9ecef;
+}
+
+/* Add focus styling */
+.file-input:focus {
+    border-color: #0056b3;
+    box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
+    outline: none;
+}
