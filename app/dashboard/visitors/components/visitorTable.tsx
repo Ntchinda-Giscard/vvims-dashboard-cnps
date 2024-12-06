@@ -17,20 +17,7 @@ export default function VisitorTable({datas, onEdit, onCheckIn, onCheckOut, onVi
     // Return formatted WAT time
     return `${watHour.toString().padStart(2, '0')}:${minute}`;
   }
-  const rows = datas?.map((data: {
-    date: ReactNode;
-    check_in_at: ReactNode;
-    check_out_at: ReactNode;
-    reason: ReactNode;
-    visit_status: any;
-    employee: any;
-    visitorByVisitor: any;
-    function: ReactNode;
-      firstname: any;
-      lastname: any; id: Key | null | undefined; region: any; department: { text_content: { content: string | number | bigint | boolean | ReactElement<any, string | JSXElementConstructor<any>> | Iterable<ReactNode> | ReactPortal | null | undefined; }; }; service: { text_content: { content: string | number | bigint | boolean | ReactElement<any, string | JSXElementConstructor<any>> | Iterable<ReactNode> | ReactPortal | Promise<AwaitedReactNode> | null | undefined; }; }; phone_number: string | number | bigint | boolean | ReactElement<any, string | JSXElementConstructor<any>> | Iterable<ReactNode> | ReactPortal | Promise<AwaitedReactNode> | null | undefined; position: {
-        function: ReactNode; text_content: { content: string | number | bigint | boolean | ReactElement<any, string | JSXElementConstructor<any>> | Iterable<ReactNode> | ReactPortal | null | undefined; };
-}; 
-}) => (
+  const rows = datas?.map((data: any) => (
     <Table.Tr key={data?.id}>
       <Table.Td style={{ color: "#404044", textTransform: 'capitalize' }} >
         <VisitorIcon 

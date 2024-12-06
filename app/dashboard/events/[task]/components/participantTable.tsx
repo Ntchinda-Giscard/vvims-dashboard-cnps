@@ -59,25 +59,7 @@ export default function ParticipantTable({datas, onEdit, onAddTask, onDelete, on
     }, [datas])
 
     const [scrolled, setScrolled] = useState(false)
-    const rows = datas?.map((data: {
-        description: ReactNode;
-        employeeByAssignedTo: any;
-        tasks_aggregate: any;
-        start_date: ReactNode;
-        title: any;
-        event_participants: any;
-        date: ReactNode;
-        start_time: ReactNode;
-        end_time: ReactNode;
-        status: ReactNode;
-        employee: any;
-        visitor: any;
-        function: ReactNode;
-        firstname: any;
-        lastname: any; id: Key | null | undefined; region: any; department: { text_content: { content: string | number | bigint | boolean | ReactElement<any, string | JSXElementConstructor<any>> | Iterable<ReactNode> | ReactPortal | null | undefined; }; }; service: { text_content: { content: string | number | bigint | boolean | ReactElement<any, string | JSXElementConstructor<any>> | Iterable<ReactNode> | ReactPortal | Promise<AwaitedReactNode> | null | undefined; }; }; phone_number: string | number | bigint | boolean | ReactElement<any, string | JSXElementConstructor<any>> | Iterable<ReactNode> | ReactPortal | Promise<AwaitedReactNode> | null | undefined; position: {
-            function: ReactNode; text_content: { content: string | number | bigint | boolean | ReactElement<any, string | JSXElementConstructor<any>> | Iterable<ReactNode> | ReactPortal | null | undefined; };
-        };
-    }) => (
+    const rows = datas?.map((data: any) => (
         <Table.Tr key={data?.id}>
             <Table.Td style={{ color: "#404044", textTransform: "capitalize"}}>
                 { <VisitorIcon

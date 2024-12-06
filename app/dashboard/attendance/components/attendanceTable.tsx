@@ -31,25 +31,7 @@ export default function AttendanceTable({ datas, onEdit, onDelete, onDeactivate 
     }
   };
 
-  const rows = datas?.map((data: {
-    clock_out_time: ReactNode;
-    clock_in_time: ReactNode;
-    attendance_state: any;
-    clock_in_date: ReactNode;
-    employee: any;
-    function: ReactNode;
-    firstname: any;
-    lastname: any;
-    id: Key | null | undefined;
-    region: any;
-    department: { text_content: { content: ReactNode } };
-    service: { text_content: { content: ReactNode } };
-    phone_number: ReactNode;
-    position: {
-      function: ReactNode;
-      text_content: { content: ReactNode };
-    };
-  }) => (
+  const rows = datas?.map((data: any) => (
     <Table.Tr key={data?.id}>
       <Table.Td style={{ color: "#404044" }}>{`${data?.employee?.firstname}` + " " + `${data?.employee?.lastname}`}</Table.Td>
       <Table.Td style={{ color: "#404044" }}>{data?.employee?.department?.text_content?.content}</Table.Td>

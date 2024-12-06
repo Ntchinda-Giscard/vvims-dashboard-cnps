@@ -12,9 +12,7 @@ const elements = [
     { position: 58, mass: 140.12, symbol: 'Ce', name: 'Cerium' },
   ];
 export default function DeparmentTable({datas, onEdit, onDelete, onDeactivate, onActivate}:any) {
-  const rows = datas?.map((data: {
-    status: ReactNode; id: Key | null | undefined; text_content: { content: string | number | bigint | boolean | ReactElement<any, string | JSXElementConstructor<any>> | Iterable<ReactNode> | ReactPortal | null | undefined; }; services_aggregate: { aggregate: { count: string | number | bigint | boolean | ReactElement<any, string | JSXElementConstructor<any>> | Iterable<ReactNode> | ReactPortal | null | undefined; }; }; employees_aggregate: { aggregate: { count: string | number | bigint | boolean | ReactElement<any, string | JSXElementConstructor<any>> | Iterable<ReactNode> | ReactPortal | null | undefined; }; }; department: { text_content: { content: string | number | bigint | boolean | ReactElement<any, string | JSXElementConstructor<any>> | Iterable<ReactNode> | ReactPortal | null | undefined; }; };
-}) => (
+  const rows = datas?.map((data: any) => (
     <Table.Tr key={data?.id}>
       <Table.Td style={{ color: "#404044" }}>{data?.text_content?.content}</Table.Td>
       <Table.Td style={{ color: "#404044" }}>{data?.services_aggregate?.aggregate?.count}</Table.Td>

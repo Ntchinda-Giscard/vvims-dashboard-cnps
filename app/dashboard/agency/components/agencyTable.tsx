@@ -4,15 +4,9 @@ import { IconAdjustments, IconTrash, IconEdit } from '@tabler/icons-react';
 import { Key, ReactElement, JSXElementConstructor, ReactNode, ReactPortal } from 'react';
 
 
-const elements = [
-    { position: 6, mass: 12.011, symbol: 'C', name: 'Carbon' },
-    { position: 7, mass: 14.007, symbol: 'N', name: 'Nitrogen' },
-    { position: 39, mass: 88.906, symbol: 'Y', name: 'Yttrium' },
-    { position: 56, mass: 137.33, symbol: 'Ba', name: 'Barium' },
-    { position: 58, mass: 140.12, symbol: 'Ce', name: 'Cerium' },
-  ];
+
 export default function AgencyTable({datas, onEdit, onDelete}:any) {
-  const rows = datas?.map((data: { id: Key | null | undefined; region: string | number | bigint | boolean | ReactElement<any, string | JSXElementConstructor<any>> | Iterable<ReactNode> | ReactPortal | null | undefined; city: string | number | bigint | boolean | ReactElement<any, string | JSXElementConstructor<any>> | Iterable<ReactNode> | ReactPortal | null | undefined; neighborhood: string | number | bigint | boolean | ReactElement<any, string | JSXElementConstructor<any>> | Iterable<ReactNode> | ReactPortal | null | undefined; office: string | number | bigint | boolean | ReactElement<any, string | JSXElementConstructor<any>> | Iterable<ReactNode> | ReactPortal | null | undefined; phone_number: string | number | bigint | boolean | ReactElement<any, string | JSXElementConstructor<any>> | Iterable<ReactNode> | ReactPortal | null | undefined; }) => (
+  const rows = datas?.map((data: any) => (
     <Table.Tr key={data?.id}>
       <Table.Td style={{ color: "#404044" }} >{data?.region}</Table.Td>
       <Table.Td style={{ color: "#404044" }}>{data?.city}</Table.Td>

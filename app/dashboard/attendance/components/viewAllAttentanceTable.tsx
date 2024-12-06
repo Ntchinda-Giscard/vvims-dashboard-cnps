@@ -25,20 +25,7 @@ export default function ViewAttendanceTable({datas, onEdit, onDelete, onDeactiva
     }
   };
 
-  const rows = datas?.map((data: {
-      attendance_status: any;
-      days: any;
-    clock_out_time: ReactNode;
-    clock_in_time: ReactNode;
-    attendance_state: any;
-    clock_in_date: ReactNode;
-    employee: any;
-    function: ReactNode;
-      firstname: any;
-      lastname: any; id: Key | null | undefined; region: any; department: { text_content: { content: string | number | bigint | boolean | ReactElement<any, string | JSXElementConstructor<any>> | Iterable<ReactNode> | ReactPortal | null | undefined; }; }; service: { text_content: { content: string | number | bigint | boolean | ReactElement<any, string | JSXElementConstructor<any>> | Iterable<ReactNode> | ReactPortal | Promise<AwaitedReactNode> | null | undefined; }; }; phone_number: string | number | bigint | boolean | ReactElement<any, string | JSXElementConstructor<any>> | Iterable<ReactNode> | ReactPortal | Promise<AwaitedReactNode> | null | undefined; position: {
-        function: ReactNode; text_content: { content: string | number | bigint | boolean | ReactElement<any, string | JSXElementConstructor<any>> | Iterable<ReactNode> | ReactPortal | null | undefined; };
-}; 
-}) => (
+  const rows = datas?.map((data: any) => (
     <Table.Tr key={data?.id}>
       <Table.Td style={{ color: "#404044" }} >{ `${data?.firstname}`}</Table.Td>
       {/* <> */}

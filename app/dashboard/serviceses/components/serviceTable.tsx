@@ -12,7 +12,7 @@ const elements = [
     { position: 58, mass: 140.12, symbol: 'Ce', name: 'Cerium' },
   ];
 export default function ServiceTable({datas, onEdit, onDelete}:any) {
-  const rows = datas?.map((data: { id: Key | null | undefined; text_content: { content: string | number | bigint | boolean | ReactElement<any, string | JSXElementConstructor<any>> | Iterable<ReactNode> | ReactPortal | Promise<AwaitedReactNode> | null | undefined; }; services_aggregate: { aggregate: { count: string | number | bigint | boolean | ReactElement<any, string | JSXElementConstructor<any>> | Iterable<ReactNode> | ReactPortal | Promise<AwaitedReactNode> | null | undefined; }; }; employees_aggregate: { aggregate: { count: string | number | bigint | boolean | ReactElement<any, string | JSXElementConstructor<any>> | Iterable<ReactNode> | ReactPortal | Promise<AwaitedReactNode> | null | undefined; }; }; department: { text_content: { content: string | number | bigint | boolean | ReactElement<any, string | JSXElementConstructor<any>> | Iterable<ReactNode> | ReactPortal | Promise<AwaitedReactNode> | null | undefined; }; }; }) => (
+  const rows = datas?.map((data: any) => (
     <Table.Tr key={data?.id}>
       <Table.Td style={{ color: "#404044" }}>{data?.text_content?.content}</Table.Td>
       <Table.Td style={{ color: "#404044" }}>{data?.department?.text_content?.content}</Table.Td>
