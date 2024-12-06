@@ -4,10 +4,10 @@ import { createClient } from "graphql-ws";
 import { getMainDefinition } from '@apollo/client/utilities';
 
 // Add the admin secret here
-const adminSecret = "0eW0K95t9BxtSPgXo6vhDxXlWjWdWVL/njXEzG0Q9WE";
+const adminSecret = "aFVeqGfcVsDTpS7efXQZ1rlMyIJugSBJ";
 const token = localStorage.getItem('token')
 const httpLink = new HttpLink({
-  uri: 'http://172.17.15.42:31000/v1/graphql',
+  uri: 'http://172.17.15.28:30011/v1/graphql',
   headers: {
     'x-hasura-admin-secret': adminSecret, // Add the admin secret in the header
     Authorization: `Bearer ${token}`
@@ -15,7 +15,7 @@ const httpLink = new HttpLink({
 });
 
 const wsLink = new GraphQLWsLink(createClient({
-  url: 'ws://172.17.15.42:31000/v1/graphql',
+  url: 'ws://172.17.15.28:30011/v1/graphql',
   connectionParams: {
     headers: {
       'x-hasura-admin-secret': adminSecret, // Add the admin secret for websocket connections too
