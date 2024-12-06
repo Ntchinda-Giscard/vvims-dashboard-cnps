@@ -1,7 +1,7 @@
 "use client"
 import { ActionIcon, Table, Menu, rem, ScrollArea, Badge, Button } from '@mantine/core';
 import { IconTrash, IconEdit, IconPrinter, IconEye, IconUserX, IconCheck, IconX } from '@tabler/icons-react';
-import { Key, ReactElement, JSXElementConstructor, ReactNode, ReactPortal, AwaitedReactNode, useState, useRef } from 'react';
+import { Key, ReactElement, JSXElementConstructor, ReactNode, ReactPortal, useState, useRef } from 'react';
 import cx from 'clsx';
 import classes from "@/app/dashboard/view-employees/table.module.css";
 

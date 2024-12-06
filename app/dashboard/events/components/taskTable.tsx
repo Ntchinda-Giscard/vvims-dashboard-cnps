@@ -1,38 +1,12 @@
 
 "use client"
 import { ActionIcon, Table, Menu, rem, ScrollArea, Badge, Avatar } from '@mantine/core';
-import { IconTrash, IconEdit, IconDotsVertical, IconPlaylistAdd, IconUserX, IconEye } from '@tabler/icons-react';
-import { Key, ReactElement, JSXElementConstructor, ReactNode, ReactPortal, AwaitedReactNode, useState } from 'react';
+import { Key, ReactElement, JSXElementConstructor, ReactNode, ReactPortal, useState } from 'react';
 import cx from 'clsx';
 import classes from "@/app/dashboard/view-employees/table.module.css";
 
 
 export default function TaskTable({datas, onEdit, onAddTask, onDelete, onSee}:any) {
-    function formatDate(dateStr: any) {
-        const date = new Date(dateStr);
-
-        // List of month names
-        const months = [
-            "January", "February", "March", "April", "May", "June",
-            "July", "August", "September", "October", "November", "December"
-        ];
-
-        // Extract parts of the date
-        const month = months[date.getMonth()];
-        const day = date.getDate();
-        const year = date.getFullYear();
-
-        // Return formatted date
-        return `${month} ${day}, ${year}`;
-    }
-
-    function formatTime(timeStr: any) {
-        // Split the time string into parts
-        const [hours, minutes] = timeStr.split(":");
-
-        // Return only the hours and minutes
-        return `${hours}:${minutes}`;
-    }
 
     const [scrolled, setScrolled] = useState(false)
     const rows = datas?.map((data: {
@@ -50,8 +24,8 @@ export default function TaskTable({datas, onEdit, onAddTask, onDelete, onSee}:an
         visitor: any;
         function: ReactNode;
         firstname: any;
-        lastname: any; id: Key | null | undefined; region: any; department: { text_content: { content: string | number | bigint | boolean | ReactElement<any, string | JSXElementConstructor<any>> | Iterable<ReactNode> | ReactPortal | Promise<AwaitedReactNode> | null | undefined; }; }; service: { text_content: { content: string | number | bigint | boolean | ReactElement<any, string | JSXElementConstructor<any>> | Iterable<ReactNode> | ReactPortal | Promise<AwaitedReactNode> | null | undefined; }; }; phone_number: string | number | bigint | boolean | ReactElement<any, string | JSXElementConstructor<any>> | Iterable<ReactNode> | ReactPortal | Promise<AwaitedReactNode> | null | undefined; position: {
-            function: ReactNode; text_content: { content: string | number | bigint | boolean | ReactElement<any, string | JSXElementConstructor<any>> | Iterable<ReactNode> | ReactPortal | Promise<AwaitedReactNode> | null | undefined; };
+        lastname: any; id: Key | null | undefined; region: any; department: { text_content: { content: string | number | bigint | boolean | ReactElement<any, string | JSXElementConstructor<any>> | Iterable<ReactNode> | ReactPortal | null | undefined; }; }; service: { text_content: { content: string | number | bigint | boolean | ReactElement<any, string | JSXElementConstructor<any>> | Iterable<ReactNode> | ReactPortal | null | undefined; }; }; phone_number: string | number | bigint | boolean | ReactElement<any, string | JSXElementConstructor<any>> | Iterable<ReactNode> | ReactPortal | null | undefined; position: {
+            function: ReactNode; text_content: { content: string | number | bigint | boolean | ReactElement<any, string | JSXElementConstructor<any>> | Iterable<ReactNode> | ReactPortal | null | undefined; };
         };
     }) => (
         <Table.Tr key={data?.id}>

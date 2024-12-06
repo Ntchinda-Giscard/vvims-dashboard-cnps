@@ -1,7 +1,7 @@
 "use client"
 import { ActionIcon, Table } from '@mantine/core';
 import { IconAdjustments, IconTrash, IconEdit } from '@tabler/icons-react';
-import { Key, ReactElement, JSXElementConstructor, ReactNode, ReactPortal, AwaitedReactNode } from 'react';
+import { Key, ReactElement, JSXElementConstructor, ReactNode, ReactPortal } from 'react';
 
 
 const elements = [

@@ -1,7 +1,7 @@
 "use client"
 import { ActionIcon, Table } from '@mantine/core';
 import { IconAdjustments, IconTrash, IconEdit } from '@tabler/icons-react';
-import { Key, ReactElement, JSXElementConstructor, ReactNode, ReactPortal, AwaitedReactNode } from 'react';
+import { Key, ReactElement, JSXElementConstructor, ReactNode, ReactPortal } from 'react';
 
 
 const elements = [
@@ -12,7 +12,7 @@ const elements = [
     { position: 58, mass: 140.12, symbol: 'Ce', name: 'Cerium' },
   ];
 export default function AgencyTable({datas, onEdit, onDelete}:any) {
-  const rows = datas?.map((data: { id: Key | null | undefined; region: string | number | bigint | boolean | ReactElement<any, string | JSXElementConstructor<any>> | Iterable<ReactNode> | ReactPortal | Promise<AwaitedReactNode> | null | undefined; city: string | number | bigint | boolean | ReactElement<any, string | JSXElementConstructor<any>> | Iterable<ReactNode> | ReactPortal | Promise<AwaitedReactNode> | null | undefined; neighborhood: string | number | bigint | boolean | ReactElement<any, string | JSXElementConstructor<any>> | Iterable<ReactNode> | ReactPortal | Promise<AwaitedReactNode> | null | undefined; office: string | number | bigint | boolean | ReactElement<any, string | JSXElementConstructor<any>> | Iterable<ReactNode> | ReactPortal | Promise<AwaitedReactNode> | null | undefined; phone_number: string | number | bigint | boolean | ReactElement<any, string | JSXElementConstructor<any>> | Iterable<ReactNode> | ReactPortal | Promise<AwaitedReactNode> | null | undefined; }) => (
+  const rows = datas?.map((data: { id: Key | null | undefined; region: string | number | bigint | boolean | ReactElement<any, string | JSXElementConstructor<any>> | Iterable<ReactNode> | ReactPortal | null | undefined; city: string | number | bigint | boolean | ReactElement<any, string | JSXElementConstructor<any>> | Iterable<ReactNode> | ReactPortal | null | undefined; neighborhood: string | number | bigint | boolean | ReactElement<any, string | JSXElementConstructor<any>> | Iterable<ReactNode> | ReactPortal | Promise<AwaitedReactNode> | null | undefined; office: string | number | bigint | boolean | ReactElement<any, string | JSXElementConstructor<any>> | Iterable<ReactNode> | ReactPortal | Promise<AwaitedReactNode> | null | undefined; phone_number: string | number | bigint | boolean | ReactElement<any, string | JSXElementConstructor<any>> | Iterable<ReactNode> | ReactPortal | Promise<AwaitedReactNode> | null | undefined; }) => (
     <Table.Tr key={data?.id}>
       <Table.Td style={{ color: "#404044" }} >{data?.region}</Table.Td>
       <Table.Td style={{ color: "#404044" }}>{data?.city}</Table.Td>
