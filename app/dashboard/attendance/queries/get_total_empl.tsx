@@ -133,11 +133,14 @@ subscription MyQuery($froms: date!, $to: date!, $company_id: uuid!, $_ilike: Str
 
 
 export const GET_ATTENDACES_USER = gql`
-subscription AttendanceStatus($id: uuid!) {
-  attendance(where: {employee_id: {_eq: $id}, clock_in_date: {_eq: now}}) {
-    id
-    clock_out_time
-    clock_in_time
-    clock_in_date
-  }
-}`
+    subscription AttendanceStatus($id: uuid!) {
+        attendance(where: {employee_id: {_eq: $id}, clock_in_date: {_eq: now}}) {
+            id
+            clock_out_time
+            clock_in_time
+            clock_in_date
+            attendance_state {
+                is_late
+            }
+        }
+    }`

@@ -44,7 +44,7 @@ export default function Page({params,}: { params: Promise<{ task: string }> }) {
             <main className="flex flex-col min-w-full min-h-full">
                 <Tabs
                     defaultValue={tabs[0].label}
-                    style={{
+                    styles={{
                         tabLabel:{
                             color: 'black'
                         },

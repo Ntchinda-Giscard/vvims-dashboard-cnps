@@ -8,7 +8,7 @@ import {
     IconUserOff,
     IconUserPin,
     IconArrowUpRight,
-    IconArrowDownRight,
+    IconArrowDownRight, IconClock,
 } from '@tabler/icons-react';
 import classes from './StatsGrid.module.css';
 import {
@@ -33,7 +33,7 @@ const icons = {
 
 
 
-export default function StatsGrid() {
+export default function StatsGrid({time, date, is_late}: any) {
     const user = useSelector((state: any) => state.auth.userInfo);
     const {loading: loadTotalEmpl, data: dataEmpl, error: errTotalEmpl} = useSubscription(GET_TOTAL_EMPLOYEE,{
         variables:{
@@ -66,16 +66,41 @@ export default function StatsGrid() {
             console.log("Error", errTotalEmpl)
         }
     }, [dataEmpl, dataPresent, dataLate, dataAbsent, dataOnTime])
-    
+
 
     const data = [
-        { title: 'Total work force', icon: 'user', value: dataEmpl?.employees_aggregate?.aggregate?.count, diff: 0 },
-        { title: 'Present workforce', icon: 'present', value: dataPresent?.employees_aggregate?.aggregate?.count, diff: 0 },
-        { title: 'On time workforce', icon: 'receipt', value: dataOnTime?.employees_aggregate?.aggregate?.count, diff: 0 },
-        { title: 'Late workforce', icon: 'coin', value: dataLate?.employees_aggregate?.aggregate?.count, diff: 0 },
-        { title: 'Absent workforce', icon: 'discount', value: (dataEmpl?.employees_aggregate?.aggregate?.count - dataPresent?.employees_aggregate?.aggregate?.count), diff: 0 },
+        // { title: 'Total employee', icon: 'user', value: dataEmpl?.employees_aggregate?.aggregate?.count, diff: 0 },
+        { title: 'Present employee', icon: 'present', value: dataPresent?.employees_aggregate?.aggregate?.count, diff: 0 },
+        { title: 'On time employee', icon: 'receipt', value: dataOnTime?.employees_aggregate?.aggregate?.count, diff: 0 },
+        { title: 'Late employee', icon: 'coin', value: dataLate?.employees_aggregate?.aggregate?.count, diff: 0 },
+        { title: 'Absent employee', icon: 'discount', value: (dataEmpl?.employees_aggregate?.aggregate?.count - dataPresent?.employees_aggregate?.aggregate?.count), diff: 0 },
     ]
+    const time_extract = (datetime: any) => {
+        if (datetime === null) {
+            return "--:--:--";
+        }
+        const date = new Date(datetime);
+        const options = { timezone: 'Africa/Douala', hour12: false };
+        return date.toLocaleTimeString('en-US', options);
+    };
 
+    function formatDate(dateStr: any) {
+        const date = new Date(dateStr);
+
+        // List of month names
+        const months = [
+            "January", "February", "March", "April", "May", "June",
+            "July", "August", "September", "October", "November", "December"
+        ];
+
+        // Extract parts of the date
+        const month = months[date.getMonth()];
+        const day = date.getDate();
+        const year = date.getFullYear();
+
+        // Return formatted date
+        return `${month} ${day}, ${year}`;
+    }
 
     const stats = data.map((stat) => {
         //@ts-ignore
@@ -83,7 +108,7 @@ export default function StatsGrid() {
         const DiffIcon = stat.diff > 0 ? IconArrowUpRight : IconArrowDownRight;
 
         return (
-            <Paper withBorder p="md" radius="md" key={stat.title}>
+            <Paper w={"100%"} withBorder p="md" radius="md" key={stat.title}>
                 <Group justify="space-between">
                     <Text size="xs" c="#404040" className={classes.title}>
                         {stat.title}
@@ -107,7 +132,27 @@ export default function StatsGrid() {
     });
     return (
 
-        <div className={"flex gap-3 flex-col min-w-full justify-center md:flex-row md:justify-between"} >{stats}</div>
+        <div className={"flex gap-3 flex-col-reverse min-w-full justify-center md:flex-row md:justify-between"} >
+            {stats}
+            <Paper w={"100%"} withBorder p="md" radius="md">
+                <Group justify="space-between">
+                    <Text size="xs" c="#404040" className={classes.title}>
+                        {"Time"}
+                    </Text>
+                    <IconClock className={classes.icon} size="1.4rem" stroke={1.5} />
+                </Group>
+                <Group align="flex-end" gap="xs" mt={25}>
+                    <Text className={classes.value} fw={900} fz={'lg'} c={is_late ? 'red' : 'teal'} >{time_extract(time)}</Text>
+                    <Text  fz="sm" c={'dimmed'} fw={500} className={classes.diff}>
+                        <span> GMT+1</span>
+                    </Text>
+                </Group>
+
+                <Text fz="sm" fw={500} c="#404040" mt={7}>
+                    {formatDate(date)}
+                </Text>
+            </Paper>
+        </div>
 
     );
 }
