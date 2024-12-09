@@ -77,7 +77,7 @@ function Login() {
     
     return ( <>
         <div className=" flex flex-row min-w-sreen min-h-screen">
-            <div className="flex w-2/4 min-h-full">
+            <div className="w-2/4 hidden lg:block  min-h-full">
                 <Image src={pic} alt="Car Rental" 
                     // layout="fill"
                     //  objectFit="cover" 
