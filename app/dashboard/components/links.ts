@@ -40,7 +40,7 @@ export const links = [
         {link: '/dashboard/leave-approvals', label: "Leave Approvals"}
     ], icon: IconDoorExit},
     
-    // {link: '/dashboard/reports', label: 'Reports', sub_links: [], icon: IconFileReport},
+    {link: '/dashboard/reports', label: 'Reports', sub_links: [], icon: IconFileReport},
     {link: '/dashboard/notifications', label: 'Notifications', sub_links: [], icon: IconBell},
     {link: '/dashboard/settings', label: 'Settings', sub_links: [], icon: IconSettings},
     
