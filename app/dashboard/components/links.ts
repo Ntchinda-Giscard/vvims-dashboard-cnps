@@ -3,7 +3,7 @@ import {
     IconCalendar,
     IconBuilding,
     IconUsersGroup,
-    IconAnalyze,
+    IconFileReport,
     IconUsers,
     IconCar,
     IconUserPin,

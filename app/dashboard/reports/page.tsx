@@ -39,7 +39,9 @@ export default function Page(){
                 <p style={{fontWeight: 800, fontSize: "large", color: "#404040"}}> Generate Reports </p>
                 <form onSubmit={form.onSubmit((values: any) => console.log(values))}>
                     <Select
+                        mt={'lg'}
                         withAsterisk
+                        radius={'md'}
                         data={['Visits', 'Attendance']}
                         label="Reports type"
                         placeholder="select"
@@ -60,7 +62,8 @@ export default function Page(){
                     <div className={'flex flex-col md:flex-row gap-3'}>
                         <DateInput
                             disabled={!checked}
-                            w={300}
+                            maw={300}
+                            radius={'md'}
                             rightSection={<IconCalendar style={{width: rem(16), height: rem(16) }} />}
                             label="From"
                             placeholder="Date input"
@@ -80,7 +83,8 @@ export default function Page(){
                         />
                         <DateInput
                             disabled={!checked}
-                            w={300}
+                            maw={300}
+                            radius={'md'}
                             rightSection={<IconCalendar style={{width: rem(16), height: rem(16) }} />}
                             label="To"
                             key={form.key('to')}

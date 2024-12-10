@@ -23,10 +23,10 @@ const poppins_light = Poppins({ subsets: ["latin"], weight:["400"] });
 
 export default function ResponsiveSizes(
     {
-        children,
-      }: Readonly<{
-        children: React.ReactNode;
-      }>
+      children,
+    }: Readonly<{
+      children: React.ReactNode;
+    }>
 ) {
   const userInfo = useSelector((state: any) => state.auth.userInfo)
   const dispatch = useDispatch()
@@ -45,9 +45,9 @@ export default function ResponsiveSizes(
       router.push("/auth/login")
     }
   },[data])
- 
 
- 
+
+
 
 
   const [mobileOpened, { toggle: toggleMobile }] = useDisclosure();
@@ -62,89 +62,89 @@ export default function ResponsiveSizes(
   };
 
   return (
-    <AppShell
-      header={{ height: { base: 60, md: 70, lg: 80 } }}
-      navbar={{
-        width: { base: 200, md: 200, lg: 200 },
-        breakpoint: 'sm',
-        collapsed: { mobile: !mobileOpened, desktop: !desktopOpened },
-      }}
-      padding="md"
-    >
-      <AppShell.Header styles={{
-        header:{
-            background: "#386BF6",
-        }
-      }}>
-        <div className="flex flex-row min-w-full min-h-full items-center">
-          
-          <Burger opened={mobileOpened} onClick={toggleMobile} hiddenFrom="sm" size="sm" />
-          <Burger opened={desktopOpened} onClick={toggleDesktop} visibleFrom="sm" size="sm" />
-          <div className="flex flex-row min-w-full items-center justify-between md:justify-between pl-4 pr-4">
-            <span className={cx([classes.logo, poppins_logo.className])}>VVIMS <span style={{color: "#17DBCC"}}>®</span></span>
-            <p className={classes.abrev}>FODECC</p>
-            {/* <UserTopButton /> */}
-            <UserButton 
-              name={`${userInfo?.employee?.firstname} ${userInfo?.employee?.lastname}`} 
-              url={data?.employees_by_pk?.file?.file_url}
-              email={userInfo?.employee?.email}
-
-            />
-          </div>
-        </div>
-            
-      </AppShell.Header>
-      <AppShell.Navbar
-        styles={{
-          navbar:{
-          }
-        }}
+      <AppShell
+          header={{ height: { base: 60, md: 70, lg: 80 } }}
+          navbar={{
+            width: { base: 200, md: 200, lg: 200 },
+            breakpoint: 'sm',
+            collapsed: { mobile: !mobileOpened, desktop: !desktopOpened },
+          }}
+          padding="md"
       >
-        <div className="flex flex-col gap-3">
-        {links.map((l , index) => (
-          // <div className="flex flex-row">
-              <NavLink 
-                href={l?.sub_links.length > 0 ? "" : l?.link} 
-                className={cx([poppins_light.className, isActive(l?.link) ? classes.active : classes.inactive] )}
-                childrenOffset={28}
-                styles={{
-                  children:{
-                    color: "#404040"
-                  }
-                }}
-                label= {l?.label} 
-                key={l?.label}
-                active= { l?.sub_links.length < 0 ? isActive(l?.link) : false} 
-                variant="subtle"
-                leftSection={<l.icon size={"1rem"} stroke={1} />}
-                component={Link}
-              >
-                 { 
-                  l?.sub_links.length > 0 ?
-                  <span>
+        <AppShell.Header styles={{
+          header:{
+            background: "#386BF6",
+          }
+        }}>
+          <div className="flex flex-row min-w-full min-h-full items-center">
+
+            <Burger opened={mobileOpened} onClick={toggleMobile} hiddenFrom="sm" size="sm" />
+            <Burger opened={desktopOpened} onClick={toggleDesktop} visibleFrom="sm" size="sm" />
+            <div className="flex flex-row min-w-full items-center justify-between md:justify-between pl-4 pr-4">
+              <span className={cx([classes.logo, poppins_logo.className])}>VVIMS <span style={{color: "#17DBCC"}}>®</span></span>
+              <p className={classes.abrev}>CNPS</p>
+              {/* <UserTopButton /> */}
+              <UserButton
+                  name={`${userInfo?.employee?.firstname} ${userInfo?.employee?.lastname}`}
+                  url={data?.employees_by_pk?.file?.file_url}
+                  email={userInfo?.employee?.email}
+
+              />
+            </div>
+          </div>
+
+        </AppShell.Header>
+        <AppShell.Navbar
+            styles={{
+              navbar:{
+              }
+            }}
+        >
+          <div className="flex flex-col gap-3 scroll-smooth overflow-y-auto ">
+            {links.map((l , index) => (
+                // <div className="flex flex-row">
+                <NavLink
+                    href={l?.sub_links.length > 0 ? "" : l?.link}
+                    className={cx([poppins_light.className, isActive(l?.link) ? classes.active : classes.inactive] )}
+                    childrenOffset={28}
+                    styles={{
+                      children:{
+                        color: "#404040"
+                      }
+                    }}
+                    label= {l?.label}
+                    key={l?.label}
+                    active= { l?.sub_links.length < 0 ? isActive(l?.link) : false}
+                    variant="filled"
+                    leftSection={<l.icon size={"1rem"} stroke={1} />}
+                    component={Link}
+                >
+                  {
+                    l?.sub_links.length > 0 ?
+                        <span>
                     {
-                    l?.sub_links.map((sub, _) => (
-                        <NavLink 
-                          href={sub?.link} 
-                          key={sub?.label} 
-                          label={sub?.label} 
-                          variant="subtle" 
-                          active={isActive(sub?.link)}
-                          defaultOpened={isActive(sub?.link)}
-                          component={Link}
-                        />
+                      l?.sub_links.map((sub, _) => (
+                          <NavLink
+                              href={sub?.link}
+                              key={sub?.label}
+                              label={sub?.label}
+                              variant="subtle"
+                              active={isActive(sub?.link)}
+                              defaultOpened={isActive(sub?.link)}
+                              component={Link}
+                          />
                       ))
                     }
                   </span>
-                  : null
-              }
-              </NavLink>
-            
-        ))}
-        </div>
-        
-      </AppShell.Navbar>
-      <AppShell.Main styles={{ main: {backfround: "#D9D9D9"} }} >{children}</AppShell.Main>
-    </AppShell>
+                        : null
+                  }
+                </NavLink>
+
+            ))}
+          </div>
+
+        </AppShell.Navbar>
+        <AppShell.Main styles={{ main: {backfround: "#D9D9D9"} }} >{children}</AppShell.Main>
+      </AppShell>
   );
 }
