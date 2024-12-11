@@ -22,7 +22,6 @@ export default function  FileUpload(){
         const objectUrl: string = URL.createObjectURL(file);
         // @ts-ignore
         setPreview(objectUrl);
-
         const formData = new FormData();
         formData.append("face", file);
         formData.append("upload_type", 'local');
