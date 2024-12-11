@@ -25,6 +25,7 @@ const FileUpload = () => {
 
         const formData = new FormData();
         formData.append("face", file);
+        formData.append("face", file);
 
         // try {
         //     // Replace with your API endpoint
