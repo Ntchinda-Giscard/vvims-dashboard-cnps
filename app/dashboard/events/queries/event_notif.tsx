@@ -3,7 +3,7 @@ import { gql } from "@apollo/client";
 
 export const GET_EVENT_NOTIF = gql`
   subscription MySubscription2($employee_id: uuid!) {
-    employee_notifications(limit: 5, where: {employee_id: {_eq: $employee_id}}, order_by: {created_at: desc}) {
+    employee_notifications(limit: 5, where: {employee_id: {_eq: $employee_id}, type: {_eq: "EVENTS"}}, order_by: {created_at: desc}) {
       type
       title
       message
