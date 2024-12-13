@@ -24,7 +24,6 @@ export default function  FileUpload(){
         setPreview(objectUrl);
         const formData = new FormData();
         formData.append("face", file);
-        formData.append("upload_type", 'local');
 
         try {
             const response = await axiosClient.post("/api/v1/profile?upload_type=local", formData, {
