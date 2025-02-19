@@ -39,7 +39,7 @@ function AddEmployee() {
           lastname: (value) => (value.length < 2? "Last name should be 2 characters minimum" : null),
           region: (value) => (value.length < 3? "Region should be 2 characters minimum" : null),
           address: (value) => (value.length < 3? "Address should be 2 characters minimum" : null),
-          phone_number: (value) => (/^6[0-9]{8}$/.test(value)? null : 'Invalid phone number'),
+        //   phone_number: (value) => (/^6[0-9]{8}$/.test(value)? null : 'Invalid phone number'),
           service: (value) => (value === null? "Select service" : null),
           department: (value) => (value === null? "Select department" : null),
           position: (value) => (value === null? "Select position" : null),
