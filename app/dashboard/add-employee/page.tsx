@@ -230,7 +230,7 @@ function AddEmployee() {
                         placeholder="6xxxxxxxx"
                         key={form.key('phone_number')}
                         {...form.getInputProps('phone_number')}
-                        withAsterisk
+                        // withAsterisk
                         styles={{
                             label:{
                                 color: "#404040"
