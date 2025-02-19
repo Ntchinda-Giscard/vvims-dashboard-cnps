@@ -23,15 +23,15 @@ export default function ViewEmployeeTable({datas, onEdit, onDelete, onDeactivate
                 </ActionIcon>
             </Menu.Target>
             <Menu.Dropdown>
-              <Menu.Item color="green" onClick={() => onEdit(data)} leftSection={<IconEye  style={{ width: rem(14), height: rem(14) }} /> }> View </Menu.Item>
+              <Menu.Item color="green" onClick={() => onEdit(data)} leftSection={<IconEdit  style={{ width: rem(14), height: rem(14) }} /> }> View </Menu.Item>
               <Menu.Item color="orange" onClick={() => onDeactivate(data)} leftSection={<IconUserX  style={{ width: rem(14), height: rem(14) }} />}> Deactivate </Menu.Item>
-              <Menu.Item color="red" onClick={() => onDelete(data)} leftSection={<IconTrash  style={{ width: rem(14), height: rem(14) }} /> }> Delete </Menu.Item>
+              {/* <Menu.Item color="red" onClick={() => onDelete(data)} leftSection={<IconTrash  style={{ width: rem(14), height: rem(14) }} /> }> Delete </Menu.Item> */}
             </Menu.Dropdown>
         </Menu>
         
-        <ActionIcon onClick={() => onEdit(data)} variant="transparent" color="green" aria-label="Settings">
+        {/* <ActionIcon onClick={() => onEdit(data)} variant="transparent" color="green" aria-label="Settings">
           <IconEdit style={{ width: '70%', height: '70%' }}  stroke={1.5} />
-        </ActionIcon>
+        </ActionIcon> */}
         <ActionIcon  onClick={() => onDelete(data)} variant="transparent" color="red" aria-label="Settings">
           <IconTrash style={{ width: '70%', height: '70%' }}  stroke={1.5} />
         </ActionIcon>
