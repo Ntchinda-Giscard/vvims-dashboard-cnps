@@ -29,12 +29,12 @@ export default function ViewEmployeeTable({datas, onEdit, onDelete, onDeactivate
             </Menu.Dropdown>
         </Menu>
         
-        {/* <ActionIcon onClick={() => onEdit(data)} variant="transparent" color="green" aria-label="Settings">
+        <ActionIcon onClick={() => onEdit(data)} variant="transparent" color="green" aria-label="Settings">
           <IconEdit style={{ width: '70%', height: '70%' }}  stroke={1.5} />
         </ActionIcon>
         <ActionIcon  onClick={() => onDelete(data)} variant="transparent" color="red" aria-label="Settings">
           <IconTrash style={{ width: '70%', height: '70%' }}  stroke={1.5} />
-        </ActionIcon> */}
+        </ActionIcon>
         
       </Table.Td>
     </Table.Tr>

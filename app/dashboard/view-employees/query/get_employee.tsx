@@ -37,3 +37,28 @@ subscription GetEmployee($limit: Int! , $offset: Int!, $search: String = "%%", $
     }
   }
 }`;
+
+
+
+
+export const GET_EMPL_PK = gql`
+query GetEmployeeInfo($id: uuid!) @cached {
+  employees_by_pk(id: $id) {
+    id
+    id_card_number
+    lastname
+    license
+    phone_number
+    position_id
+    region
+    status
+    supervisor_id
+    updated_at
+    email
+    department_id
+    service_id
+    function
+    firstname
+    address
+  }
+}`;
