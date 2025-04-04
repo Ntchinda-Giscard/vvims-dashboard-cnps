@@ -21,7 +21,7 @@ export default function VisitorTable({datas, onEdit, onCheckIn, onCheckOut, onVi
     <Table.Tr key={data?.id}>
       <Table.Td style={{ color: "#404044", textTransform: 'capitalize' }} >
         <VisitorIcon 
-          file_url={data?.visitorByVisitor?.file?.file_url}
+          file_url={data?.visitorByVisitor?.fileByPhoto?.file_url}
           firstname={data?.visitorByVisitor?.firstname}
           lastname={data?.visitorByVisitor?.lastname}
         />
