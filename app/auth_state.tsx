@@ -10,7 +10,7 @@ function AuthState() {
 
     useEffect(() =>{
         if(user === null){
-            router.push("/auth/login")
+            // router.push("/auth/login")
         }
     })
     return ( <></> );

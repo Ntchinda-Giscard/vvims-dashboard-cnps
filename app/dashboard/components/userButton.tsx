@@ -66,7 +66,7 @@ export function UserButton({name, url, email}: any) {
     dispatch(logout());
     localStorage.removeItem("token")
     // Navigate to login page
-    router.push('/auth/login');
+    // router.push('/auth/login');
 
   }
 
