@@ -24,7 +24,7 @@ export default function Page(){
     const [checked, setChecked] = useState(false);
     const [activePage, setPage] = useState(1);
     const [itemsPerPage, setItemsPerPage] = useState(10);
-    const {data: dataReport, loading: loadReport, error: errReport} = useQuery(GET_REPORT, {
+    const {data: dataReport, loading: loadReport, error: errReport} = useSubscription(GET_REPORT, {
         variables:{
             limit: itemsPerPage,
             offset: (activePage-1) * itemsPerPage,
@@ -54,7 +54,7 @@ export default function Page(){
     const [allArr, setAll] = useState([]);
 
 
-    const {loading: loadAgg, error: errAgg, data: dataAgg} = useQuery(REPORT_AGG);
+    const {loading: loadAgg, error: errAgg, data: dataAgg} = useSubscription(REPORT_AGG);
     const [inserReport, {loading: loadInsert}] = useMutation(INSERT_REPORT)
 
     useEffect(() =>{
