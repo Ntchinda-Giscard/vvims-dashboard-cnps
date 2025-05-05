@@ -67,7 +67,7 @@ export function ReportsTable({datas}: any) {
       <Table.Td>
         <Group gap="sm">
           <Avatar size={30} src={item?.avatar} radius={30} />
-          <Text fz="sm" fw={500}>
+          <Text fz="sm" fw={500} c={"#404040"}>
             {item?.name}
           </Text>
         </Group>
@@ -79,10 +79,10 @@ export function ReportsTable({datas}: any) {
         </Badge>
       </Table.Td>
       <Table.Td>
-        <Text fz='sm'>{item?.from_date}</Text>
+        <Text fz='sm' c={"#404040"} >{item?.from_date}</Text>
       </Table.Td>
       <Table.Td>
-        <Text fz="sm">{item?.to_date}</Text>
+        <Text fz="sm" c={"#404040"} >{item?.to_date}</Text>
       </Table.Td>
       <Table.Td>
         <Group gap={0} justify="flex-end">
@@ -102,10 +102,10 @@ export function ReportsTable({datas}: any) {
       <Table verticalSpacing="sm">
         <Table.Thead>
           <Table.Tr>
-            <Table.Th>Report</Table.Th>
-            <Table.Th>Job title</Table.Th>
-            <Table.Th>From</Table.Th>
-            <Table.Th>To</Table.Th>
+            <Table.Th c={"#404040"}>Report</Table.Th>
+            <Table.Th c={"#404040"}>Job title</Table.Th>
+            <Table.Th c={"#404040"}>From</Table.Th>
+            <Table.Th c={"#404040"}>To</Table.Th>
             <Table.Th />
           </Table.Tr>
         </Table.Thead>
