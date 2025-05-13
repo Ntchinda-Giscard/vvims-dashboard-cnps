@@ -1,7 +1,7 @@
-import { IconPencil, IconTrash, IconDownload } from '@tabler/icons-react';
-import { ActionIcon, Anchor, Avatar, Badge, Group, Table, Text } from '@mantine/core';
+import { IconPencil, IconTrash, IconDownload, IconPrinter } from '@tabler/icons-react';
+import { ActionIcon, Anchor, Avatar, Badge, Button, Group, rem, Table, Text } from '@mantine/core';
 import Link from "next/link"
-import { ReactElement, JSXElementConstructor, ReactNode, AwaitedReactNode, Key, ReactPortal, useEffect } from 'react';
+import { ReactElement, JSXElementConstructor, ReactNode, AwaitedReactNode, Key, ReactPortal, useEffect, useRef } from 'react';
 
 
 const attendanceState: Record<string, string> = {
@@ -12,7 +12,7 @@ const attendanceState: Record<string, string> = {
 
 
 export function VisitsReportsTable({datas}: any) {
-
+  const tableRef = useRef<HTMLDivElement>(null);  // Create a ref to target the table
   useEffect(() =>{
     console.log( "Console data ====>", datas)
   }, [datas])
@@ -23,6 +23,19 @@ export function VisitsReportsTable({datas}: any) {
     const minutes: string = date.getMinutes().toString().padStart(2, '0');
     return `${hours}:${minutes}`;
   }
+
+  const handlePrint = () => {
+    //@ts-ignore
+    const printContents = tableRef.current?.innerHTML;  // Get the table content
+    const originalContents = document.body.innerHTML;   // Save the original page content
+    
+    if (printContents) {
+      document.body.innerHTML = printContents;          // Replace body with table content
+      window.print();                                   // Trigger print dialog
+      document.body.innerHTML = originalContents;       // Restore original content
+      window.location.reload();                         // Reload page to reset state
+    }
+  };
   const rows = datas.map((item: {
       checkOut: string;
       checkIn: string;
@@ -73,20 +86,27 @@ export function VisitsReportsTable({datas}: any) {
   ));
 
   return (
-    <Table.ScrollContainer minWidth={800}>
-      <Table verticalSpacing="sm">
-        <Table.Thead>
-          <Table.Tr>
-            <Table.Th>Visitor</Table.Th>
-            <Table.Th>Date</Table.Th>
-            <Table.Th>checkIn</Table.Th>
-            <Table.Th>checkOut</Table.Th>
-            <Table.Th>Reason</Table.Th>
-            <Table.Th>Status</Table.Th>
-          </Table.Tr>
-        </Table.Thead>
-        <Table.Tbody>{rows}</Table.Tbody>
-      </Table>
-    </Table.ScrollContainer>
+    <>
+      <Button onClick={handlePrint} leftSection={<IconPrinter style={{ width: rem(16), height: rem(16) }} stroke={1} />}>
+              PDF
+            </Button>
+      <Table.ScrollContainer minWidth={800}>
+      <div ref={tableRef}>
+        <Table verticalSpacing="sm">
+          <Table.Thead>
+            <Table.Tr>
+              <Table.Th>Visitor</Table.Th>
+              <Table.Th>Date</Table.Th>
+              <Table.Th>checkIn</Table.Th>
+              <Table.Th>checkOut</Table.Th>
+              <Table.Th>Reason</Table.Th>
+              <Table.Th>Status</Table.Th>
+            </Table.Tr>
+          </Table.Thead>
+          <Table.Tbody>{rows}</Table.Tbody>
+        </Table>
+      </div>
+      </Table.ScrollContainer>
+    </>
   );
 }
