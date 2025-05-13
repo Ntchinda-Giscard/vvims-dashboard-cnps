@@ -8,7 +8,7 @@ query GetType @cached {
 }`;
 
 export const GET_LEAVE_AGG = gql`
-subscription MyQuery {
+query MyQuery {
   leaves_aggregate {
     aggregate {
       count
@@ -17,7 +17,7 @@ subscription MyQuery {
 }`;
 
 export const GET_LEAVES = gql`
-subscription GetLeaves($limit: Int!, $offset: Int!) {
+query GetLeaves($limit: Int!, $offset: Int!) {
   leaves(limit: $limit, offset: $offset, order_by: {created_at: desc}) {
     id
     status
@@ -34,6 +34,16 @@ subscription GetLeaves($limit: Int!, $offset: Int!) {
         id
         file_url
       }
+        department{
+          text_content{
+            content
+          }
+        }
+        service{
+          text_content{
+            content
+          }
+        }
     }
   }
 }`;
@@ -49,7 +59,7 @@ query MyQuery($leave_id: uuid!) {
 
 
 export const GET_PENDING_LEAVES_AGG = gql`
-subscription MyQuery {
+query MyQuery {
   leaves_aggregate(where: {status: {_eq: PENDING}}) {
     aggregate {
       count

@@ -4,18 +4,15 @@ import { useForm } from '@mantine/form';
 import { IconCalendar, IconPdf, IconFileTypePdf } from '@tabler/icons-react';
 import {DateInput} from "@mantine/dates";
 import { useEffect, useState } from "react";
-import { ReportsTable } from "./components/reports-table";
 import { useMutation, useQuery, useSubscription } from "@apollo/client";
 import { GET_EMPLOYEES_QUERY, GET_REPORT, REPORT_AGG } from "./query/query";
-import { getFirstAndLastDayOfMonth } from "./utils";
 import { INSERT_REPORT } from "./mutations/mutations";
-import axiosClient from "../settings/components/axiosClient";
 import toast from "react-hot-toast";
-import FootPage from "../components/fotter";
 import { GET_ALL_SERVICES } from "../visitors/query/get_all_services";
 import { GET_ALL_DEPT } from "../departments/queries/get_dept";
-import { GET_EMPLY } from "../add-employee/query/get_all_empl";
 import { useSelector } from "react-redux";
+import { VisitsReportsTable } from "./components/visit-reports-table";
+import { AttendanceReportsTable } from "./components/attendance-reports-table";
 
 
 
@@ -24,7 +21,7 @@ export default function Page(){
     const [checked, setChecked] = useState(false);
     const [activePage, setPage] = useState(1);
     const [itemsPerPage, setItemsPerPage] = useState(10);
-    const {data: dataReport, loading: loadReport, error: errReport} = useSubscription(GET_REPORT, {
+    const {data: dataReport, loading: loadReport, error: errReport} = useQuery(GET_REPORT, {
         variables:{
             limit: itemsPerPage,
             offset: (activePage-1) * itemsPerPage,
@@ -46,16 +43,15 @@ export default function Page(){
         company_id: user?.employee?.company_id
     }
     })
+
+    const [inserReport, {loading: loadInsert, data: dataGetReport}] = useMutation(INSERT_REPORT);
+
     const [pdf_url, setPdfUrl] = useState<string | null>(null);
     const [loading, setLoading] = useState(false);
     const [about, setAbout] = useState<string | null>(null);
     const [deptArr, setDept] = useState([]);
     const [servArr, setServ] = useState([]);
     const [allArr, setAll] = useState([]);
-
-
-    const {loading: loadAgg, error: errAgg, data: dataAgg} = useSubscription(REPORT_AGG);
-    const [inserReport, {loading: loadInsert}] = useMutation(INSERT_REPORT)
 
     useEffect(() =>{
         console.log( "Exactly", dataReport)
@@ -72,7 +68,7 @@ export default function Page(){
             department: any; id: any; firstname: any, lastname:any 
 }) =>({
             value: d?.id,
-            label: `${d?.firstname}` + " "+ `${d?.lastname}` ,
+            label: `${d?.firstname}` + " "+ `${d?.lastname}`,
             department: d?.department?.text_content?.content
         }))
         
@@ -111,6 +107,7 @@ export default function Page(){
         // setLoading(true);
         console.log(values)
         console.log(values.type?.toLowerCase());
+
         inserReport({
             variables:{
                 categoryId: about === 'Employee' ? values?.employee : about === "Service" ? values?.service : values?.department,
@@ -128,16 +125,6 @@ export default function Page(){
             }
         })
 
-        // try{
-            
-        //     setPdfUrl(response.data.pdf_url)
-        //     console.log(response.data.pdf_url);
-        //     toast.success("Operation successful")
-        // }catch (err){
-        //     toast.error(`${err}`)
-        // }finally{
-        //     setLoading(false);
-        // }
     }
     return(
         <>
@@ -186,7 +173,7 @@ export default function Page(){
                         }}
                     />
                     {
-                        about === 'Employee' ? <Select label="Employees" key={form.key('employee')}
+                        about === 'Employee' ? <Select label="Employees" searchable key={form.key('employee')}
                         {...form.getInputProps('employee')} data={allArr}  styles={{
                             label:{color: "#404040"},
                             option:{color: "#404040"}
@@ -194,7 +181,7 @@ export default function Page(){
                     }
 
                     {
-                        about === 'Service' ? <Select label="Services" key={form.key('service')}
+                        about === 'Service' ? <Select label="Services" searchable key={form.key('service')}
                         {...form.getInputProps('service')} data={servArr} styles={{
                             label:{color: "#404040"},
                             option:{color: "#404040"}
@@ -203,7 +190,7 @@ export default function Page(){
 
 
                     {
-                        about === 'Department' ? <Select label="Departments" key={form.key('department')}
+                        about === 'Department' ? <Select label="Departments" searchable key={form.key('department')}
                         {...form.getInputProps('department')} data={deptArr} styles={{
                             label:{color: "#404040"},
                             option:{color: "#404040"}
@@ -280,20 +267,14 @@ export default function Page(){
                 mt={'md'}
                 p={'md'}
             >
-                {
-                    loadReport && <p>Loading...</p>
-                }
-                {
-                    errReport && <p>{`${errReport}`}</p>
-                }
-                {
-                    dataReport && <ReportsTable datas={dataReport?.reports} />
-                }
-                <FootPage 
-                   activePage={activePage}
-                   onPage={(v: any) => setPage(v)}
-                    total={Math.ceil(dataAgg?.reports_aggregate?.aggregate?.count/itemsPerPage)}
-                />
+            {
+
+                    dataGetReport?.generateCsvReport?.type === "visits" ? <VisitsReportsTable datas={dataGetReport?.generateCsvReport?.visitData} /> : 
+                    dataGetReport?.generateCsvReport?.type === "attendance" ?
+                    <AttendanceReportsTable datas={dataGetReport?.generateCsvReport?.attendanceData} /> : <div> Reports </div>
+                    // <div> Attendance </div>
+  
+            }    
                 
             </Paper>
         </>

@@ -23,7 +23,8 @@ export default function Providers({
   children: React.ReactNode;
 }) {
 
-const adminSecret = "aFVeqGfcVsDTpS7efXQZ1rlMyIJugSBJ";
+// const adminSecret = "aFVeqGfcVsDTpS7efXQZ1rlMyIJugSBJ";
+const adminSecret = "XVJdrWUXH5hdGh8ET68HtwXVJdrWUXH5hdGh8ET68Htw"
 const [token, setToken ] = useState(null)
 useEffect(() =>{
   const tokenLocal = window.localStorage.getItem('token')
@@ -32,7 +33,8 @@ useEffect(() =>{
 },[])
 
 const httpLink = new HttpLink({
-  uri: 'http://172.17.15.28:30011/v1/graphql',
+  // uri: 'http://172.17.15.28:30011/v1/graphql',
+  uri: 'https://faithful-lynx-39.hasura.app/v1/graphql',
   headers: {
     'x-hasura-admin-secret': adminSecret, // Add the admin secret in the header
     Authorization: `Bearer ${token}`
@@ -40,7 +42,8 @@ const httpLink = new HttpLink({
 });
 
 const wsLink = new GraphQLWsLink(createClient({
-  url: 'ws://172.17.15.28:30011/v1/graphql',
+  // url: 'ws://172.17.15.28:30011/v1/graphql',
+  uri: 'https://faithful-lynx-39.hasura.app/v1/graphql',
   connectionParams: {
     headers: {
       'x-hasura-admin-secret': adminSecret, // Add the admin secret for websocket connections too

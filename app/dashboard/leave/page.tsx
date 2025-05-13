@@ -5,7 +5,7 @@ import LeavesTables from "./components/leavesTables";
 import { useDisclosure } from '@mantine/hooks';
 import AddLeaveManagement from "./components/addLeaveModal";
 import { GET_LEAVES, GET_LEAVE_AGG } from "./queries/queries";
-import { useMutation, useSubscription } from "@apollo/client";
+import { useMutation, useSubscription, useQuery } from "@apollo/client";
 import LeaveModal from "./components/leaveModal";
 import { useState } from "react";
 import FullWidthSkeletonStack from "../components/defaultTable";
@@ -26,13 +26,13 @@ function Page() {
     const [openedAdd, { open: openAdd, close: closeAdd }] = useDisclosure(false);
     const [openedSeeLeave, { open: openLeave, close : closeLeave}] = useDisclosure(false);
     const [openedDeleteLeave, { open: openDelete, close : closeDelete }] = useDisclosure(false);
-    const {data: dataLeave, error: errLeave, loading: loadLeave} = useSubscription(GET_LEAVES,{
+    const {data: dataLeave, error: errLeave, loading: loadLeave} = useQuery(GET_LEAVES,{
         variables:{
             limit: itemsPerPage,
             offset: (activePage-1) * itemsPerPage,
         }
     });
-    const {data: dataAgg, error: errAgg, loading: loadAgg} = useSubscription(GET_LEAVE_AGG)
+    const {data: dataAgg, error: errAgg, loading: loadAgg} = useQuery(GET_LEAVE_AGG)
     const [deleteLeave, {}] = useMutation(DELETE_LEAVE);
 
 

@@ -18,6 +18,11 @@ export default function LeavesTables({datas, onEdit, onDelete, onDeactivate}:any
         />
       </Table.Td>
       <Table.Td style={{ color: "#404044" }}>{data?.leave_type}</Table.Td>
+
+      <Table.Td style={{ color: "#404044" }}>{data?.employee?.department?.text_content?.content}</Table.Td>
+      <Table.Td style={{ color: "#404044" }}>{data?.employee?.service?.text_content?.content}</Table.Td>
+      {/* <Table.Td style={{ color: "#404044" }}>{data?.employee?.department?.text_content?.content}</Table.Td> */}
+
       <Table.Td style={{ color: "#404044" }}>{data?.start_date}</Table.Td>
       <Table.Td style={{ color: "#404044" }}>{data?.end_date}</Table.Td>
       <Table.Td style={{ color: "#404044" }}>
@@ -38,14 +43,6 @@ export default function LeavesTables({datas, onEdit, onDelete, onDeactivate}:any
               <Menu.Item color="red" onClick={() => onDelete(data)} leftSection={<IconTrash  style={{ width: rem(14), height: rem(14) }} /> }> Delete </Menu.Item>
             </Menu.Dropdown>
         </Menu>
-        
-        {/* <ActionIcon onClick={() => onEdit(data)} variant="transparent" color="green" aria-label="Settings">
-          <IconEdit style={{ width: '70%', height: '70%' }}  stroke={1.5} />
-        </ActionIcon>
-        <ActionIcon  onClick={() => onDelete(data)} variant="transparent" color="red" aria-label="Settings">
-          <IconTrash style={{ width: '70%', height: '70%' }}  stroke={1.5} />
-        </ActionIcon> */}
-        
       </Table.Td>
     </Table.Tr>
   ));
