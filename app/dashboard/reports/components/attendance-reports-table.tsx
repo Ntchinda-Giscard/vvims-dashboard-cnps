@@ -34,6 +34,34 @@ export function AttendanceReportsTable({datas}: any) {
     return `${hours}:${minutes}`;
   }
 
+  /**
+ * Calculate duration between two times in "HH:mm" format.
+ */
+  function calculateDuration(startTime: string, endTime: string): string {
+    const [startHour, startMinute] = startTime.split(":").map(Number);
+    const [endHour, endMinute] = endTime.split(":").map(Number);
+  
+    const start = new Date();
+    start.setHours(startHour, startMinute, 0, 0);
+  
+    const end = new Date();
+    end.setHours(endHour, endMinute, 0, 0);
+  
+    let diff = (end.getTime() - start.getTime()) / (1000 * 60); // difference in minutes
+  
+    if (diff < 0) {
+      // handle cases where end time is on the next day
+      diff += 24 * 60;
+    }
+  
+    const hours = Math.floor(diff / 60);
+    const minutes = Math.floor(diff % 60);
+  
+    return `${hours}h ${minutes}m`;
+  }
+  
+
+
 
   const rows = datas.map((item: {
       status: any;
@@ -69,6 +97,10 @@ export function AttendanceReportsTable({datas}: any) {
       </Table.Td>
 
       <Table.Td>
+        <Text c={"#404040"} fz='sm'>{ calculateDuration(extractTime(item?.departure), extractTime(item?.arrival))}</Text>
+      </Table.Td>
+
+      <Table.Td>
         <Text c={"#404040"} fz="sm">{item?.reason}</Text>
       </Table.Td>
 
@@ -101,6 +133,7 @@ export function AttendanceReportsTable({datas}: any) {
               <Table.Th> <Text c="#404040"> Date </Text> </Table.Th>
               <Table.Th> <Text c="#404040"> Arrival </Text> </Table.Th>
               <Table.Th> <Text c="#404040"> Departure </Text> </Table.Th>
+              <Table.Th> <Text c="#404040"> Duration </Text> </Table.Th>
               <Table.Th> <Text c="#404040"> Reason </Text> </Table.Th>
               <Table.Th> <Text c="#404040"> Status </Text> </Table.Th>
               <Table.Th />
