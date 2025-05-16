@@ -43,24 +43,24 @@ export function AttendanceReportsTable({datas}: any) {
       <Table.Td>
         <Group gap="sm">
           <Avatar size={30} name={item?.employee} color='initials' radius={30} />
-          <Text fz="sm" fw={500}>
+          <Text c={"#404040"} fz="sm" fw={500}>
             {item?.employee}
           </Text>
         </Group>
       </Table.Td>
 
       <Table.Td>
-        <Text fz='sm'>{item?.date}</Text>
+        <Text c={"#404040"} fz='sm'>{item?.date}</Text>
       </Table.Td>
       <Table.Td>
-        <Text fz='sm'>{item?.arrival}</Text>
+        <Text c={"#404040"} fz='sm'>{item?.arrival}</Text>
       </Table.Td>
       <Table.Td>
-        <Text fz='sm'>{item?.departure}</Text>
+        <Text c={"#404040"} fz='sm'>{item?.departure}</Text>
       </Table.Td>
 
       <Table.Td>
-        <Text fz="sm">{item?.reason}</Text>
+        <Text c={"#404040"} fz="sm">{item?.reason}</Text>
       </Table.Td>
 
       <Table.Td>

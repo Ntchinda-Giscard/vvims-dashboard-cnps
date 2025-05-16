@@ -56,24 +56,24 @@ export function VisitsReportsTable({datas}: any) {
       <Table.Td>
         <Group gap="sm">
           <Avatar size={30} src={item?.visitorName}  name={item?.visitorName} color='initials' radius={30} />
-          <Text fz="sm" fw={500}>
+          <Text c={"#404040"} fz="sm" fw={500}>
             {item?.visitorName}
           </Text>
         </Group>
       </Table.Td>
 
       <Table.Td>
-        <Text fz='sm'>{item?.date}</Text>
+        <Text c={"#404040"} fz='sm'>{item?.date}</Text>
       </Table.Td>
       <Table.Td>
-        <Text fz='sm'>{extractTime(item?.checkIn)}</Text>
+        <Text c={"#404040"} fz='sm'>{extractTime(item?.checkIn)}</Text>
       </Table.Td>
       <Table.Td>
-        <Text fz='sm'>{extractTime(item?.checkOut)}</Text>
+        <Text c={"#404040"} fz='sm'>{extractTime(item?.checkOut)}</Text>
       </Table.Td>
 
       <Table.Td>
-        <Text fz="sm">{item?.reason}</Text>
+        <Text c={"#404040"} fz="sm">{item?.reason}</Text>
       </Table.Td>
 
       <Table.Td>
