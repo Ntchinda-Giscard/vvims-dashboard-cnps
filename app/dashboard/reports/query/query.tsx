@@ -1,7 +1,7 @@
 import { gql } from "@apollo/client";
 
 export const GET_REPORT = gql`
-subscription GetReports($limit: Int = 10, $offset: Int = 0) {
+query GetReports($limit: Int = 10, $offset: Int = 0) {
   reports(limit: $limit, offset: $offset, order_by: {created_at: desc}) {
     report_link
     types
@@ -14,7 +14,7 @@ subscription GetReports($limit: Int = 10, $offset: Int = 0) {
 
 
 export const REPORT_AGG = gql`
-subscription MyQuery {
+query MyQuery {
   reports_aggregate {
     aggregate {
       count

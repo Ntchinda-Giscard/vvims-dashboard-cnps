@@ -3,48 +3,6 @@ import { ActionIcon, Anchor, Avatar, Badge, Group, Table, Text } from '@mantine/
 import Link from "next/link"
 import { ReactElement, JSXElementConstructor, ReactNode, AwaitedReactNode, Key, ReactPortal, useEffect } from 'react';
 
-const data = [
-  {
-    avatar:
-      'https://raw.githubusercontent.com/mantinedev/mantine/master/.demo/avatars/avatar-1.png',
-    name: 'Robert Wolfkisser',
-    job: 'Engineer',
-    email: 'rob_wolf@gmail.com',
-    phone: '+44 (452) 886 09 12',
-  },
-  {
-    avatar:
-      'https://raw.githubusercontent.com/mantinedev/mantine/master/.demo/avatars/avatar-7.png',
-    name: 'Jill Jailbreaker',
-    job: 'Engineer',
-    email: 'jj@breaker.com',
-    phone: '+44 (934) 777 12 76',
-  },
-  {
-    avatar:
-      'https://raw.githubusercontent.com/mantinedev/mantine/master/.demo/avatars/avatar-2.png',
-    name: 'Henry Silkeater',
-    job: 'Designer',
-    email: 'henry@silkeater.io',
-    phone: '+44 (901) 384 88 34',
-  },
-  {
-    avatar:
-      'https://raw.githubusercontent.com/mantinedev/mantine/master/.demo/avatars/avatar-3.png',
-    name: 'Bill Horsefighter',
-    job: 'Designer',
-    email: 'bhorsefighter@gmail.com',
-    phone: '+44 (667) 341 45 22',
-  },
-  {
-    avatar:
-      'https://raw.githubusercontent.com/mantinedev/mantine/master/.demo/avatars/avatar-10.png',
-    name: 'Jeremy Footviewer',
-    job: 'Manager',
-    email: 'jeremy@foot.dev',
-    phone: '+44 (881) 245 65 65',
-  },
-];
 
 const jobColors: Record<string, string> = {
   attendance: 'blue',
@@ -67,7 +25,7 @@ export function ReportsTable({datas}: any) {
       <Table.Td>
         <Group gap="sm">
           <Avatar size={30} src={item?.avatar} radius={30} />
-          <Text fz="sm" fw={500} c={"#404040"}>
+          <Text fz="sm" fw={500}>
             {item?.name}
           </Text>
         </Group>
@@ -79,10 +37,10 @@ export function ReportsTable({datas}: any) {
         </Badge>
       </Table.Td>
       <Table.Td>
-        <Text fz='sm' c={"#404040"} >{item?.from_date}</Text>
+        <Text fz='sm'>{item?.from_date}</Text>
       </Table.Td>
       <Table.Td>
-        <Text fz="sm" c={"#404040"} >{item?.to_date}</Text>
+        <Text fz="sm">{item?.to_date}</Text>
       </Table.Td>
       <Table.Td>
         <Group gap={0} justify="flex-end">
@@ -102,10 +60,10 @@ export function ReportsTable({datas}: any) {
       <Table verticalSpacing="sm">
         <Table.Thead>
           <Table.Tr>
-            <Table.Th c={"#404040"}>Report</Table.Th>
-            <Table.Th c={"#404040"}>Job title</Table.Th>
-            <Table.Th c={"#404040"}>From</Table.Th>
-            <Table.Th c={"#404040"}>To</Table.Th>
+            <Table.Th>Report</Table.Th>
+            <Table.Th>Job title</Table.Th>
+            <Table.Th>From</Table.Th>
+            <Table.Th>To</Table.Th>
             <Table.Th />
           </Table.Tr>
         </Table.Thead>
