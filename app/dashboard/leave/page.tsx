@@ -5,7 +5,7 @@ import LeavesTables from "./components/leavesTables";
 import { useDisclosure } from '@mantine/hooks';
 import AddLeaveManagement from "./components/addLeaveModal";
 import { GET_LEAVES, GET_LEAVE_AGG } from "./queries/queries";
-import { useMutation, useSubscription, useQuery } from "@apollo/client";
+import { useMutation, useSubscription } from "@apollo/client";
 import LeaveModal from "./components/leaveModal";
 import { useState } from "react";
 import FullWidthSkeletonStack from "../components/defaultTable";
@@ -26,15 +26,15 @@ function Page() {
     const [openedAdd, { open: openAdd, close: closeAdd }] = useDisclosure(false);
     const [openedSeeLeave, { open: openLeave, close : closeLeave}] = useDisclosure(false);
     const [openedDeleteLeave, { open: openDelete, close : closeDelete }] = useDisclosure(false);
-    const {data: dataLeave, error: errLeave, loading: loadLeave} = useQuery(GET_LEAVES,{
+    const {data: dataLeave, error: errLeave, loading: loadLeave} = useSubscription(GET_LEAVES,{
         variables:{
             limit: itemsPerPage,
             offset: (activePage-1) * itemsPerPage,
         }
     });
-    const {data: dataAgg, error: errAgg, loading: loadAgg} = useQuery(GET_LEAVE_AGG)
+    const {data: dataAgg, error: errAgg, loading: loadAgg} = useSubscription(GET_LEAVE_AGG)
     const [deleteLeave, {}] = useMutation(DELETE_LEAVE);
-
+    
 
     const [leaves, setLeaves] = useState();
 
@@ -47,8 +47,8 @@ function Page() {
         openDelete()
     }
     return ( <>
-        <main className="flex flex-col min-w-full min-h-full">
-            <AddLeaveManagement
+       <main className="flex flex-col min-w-full min-h-full">
+            <AddLeaveManagement 
                 opened={openedAdd}
                 close={closeAdd}
             />
@@ -57,7 +57,7 @@ function Page() {
                 close={closeLeave}
                 leave={leaves}
             />
-            <DeleteLEaveModal
+            <DeleteLEaveModal 
                 opened={openedDeleteLeave}
                 close={closeDelete}
                 leave={leaves}
@@ -68,49 +68,49 @@ function Page() {
                     Add Leaves
                 </Button>
             </div>
-            <TopLeaveCard />
-            {/* <Paper withBorder>
+                <TopLeaveCard />
+                {/* <Paper withBorder>
                     <Demo />
                 </Paper> */}
-            <div className="flex flex-col md:flex-row">
-                <LeaveTypesGroupAgg />
-            </div>
-            <Space h={20} />
-            <Paper
-                shadow="md"
-                radius="md"
-                p="md"
-            >
-                {
-                    errLeave || loadLeave ?
+                <div className="flex flex-col md:flex-row">
+                    <LeaveTypesGroupAgg />
+                </div>
+                <Space h={20} />
+                <Paper
+                    shadow="md"
+                    radius="md"
+                    p="md"
+                >
+                    {
+                        errLeave || loadLeave ?
                         <FullWidthSkeletonStack /> :
                         <LeavesTables
                             datas={dataLeave?.leaves}
                             onEdit={(v:any) => handleViewLeave(v)}
                             onDelete={(v: any) => handelDelete(v)}
                         />
-                }
-                <div className="flex min-w-full items-center md:flex-row flex-col justify-center md:justify-between">
-                    {
-                        errAgg || loadAgg ? null :
-                            <p className={poppins.className} style={{color: "#007FFF", fontSize: "small"}}>
+                    }
+                    <div className="flex min-w-full items-center md:flex-row flex-col justify-center md:justify-between">
+                            {
+                                errAgg || loadAgg ? null :
+                                <p className={poppins.className} style={{color: "#007FFF", fontSize: "small"}}>
                                 Displaying { dataLeave?.leaves?.length ? dataLeave?.leaves?.length*activePage : 0} of {dataAgg?.leaves_aggregate?.aggregate?.count} leaves.
-                            </p>}
-                    {
-                        errAgg || loadAgg ? null :
-                            <div className="flex flex-row">
-                                <NumberInput w={100} value={itemsPerPage} min={10} max={100}
-                                    //@ts-ignore
-                                             onChange={setItemsPerPage} />
-                                <FootPage
+                                </p>}
+                            {
+                                errAgg || loadAgg ? null :
+                                <div className="flex flex-row">
+                                <NumberInput w={100} value={itemsPerPage} min={10} max={100} 
+                                //@ts-ignore
+                                onChange={setItemsPerPage} />
+                                <FootPage 
                                     activePage={activePage}
                                     onPage={(v: any) => setPage(v)}
                                     total={Math.ceil(dataAgg?.leaves_aggregate?.aggregate?.count/itemsPerPage)}
                                 />
-                            </div>
-                    }
-                </div>
-            </Paper>
+                                </div>
+                            }
+                    </div>
+                </Paper>
         </main>
     </> );
 }

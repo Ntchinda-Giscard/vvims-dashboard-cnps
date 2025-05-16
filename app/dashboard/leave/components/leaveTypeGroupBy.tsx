@@ -3,7 +3,7 @@ import { Paper, RingProgress, Progress, Group, Text, Stack } from "@mantine/core
 import classes from "@/app/dashboard/leave/components/styles.module.css";
 import { useQuery } from "@apollo/client";
 import {GET_AGG_BERIEVED, GET_AGG_MAT, GET_AGG_OTH, GET_AGG_SICK, GET_LEAVE_TYPE} from "../queries/queries";
-import { ReactElement, JSXElementConstructor, ReactNode, ReactPortal, Key, useEffect } from "react";
+import { ReactElement, JSXElementConstructor, ReactNode, ReactPortal, AwaitedReactNode, Key, useEffect } from "react";
 import {useSelector} from "react-redux";
 
 function LeaveTypesGroupAgg() {
@@ -52,7 +52,7 @@ function LeaveTypesGroupAgg() {
                         <p>Loading...</p>
                     ) : (
                         dataLeaveType?.leave_type?.map((leaveType: {
-                            type: ReactNode; leave_type_name: string | number | bigint | boolean | ReactElement<any, string | JSXElementConstructor<any>> | Iterable<ReactNode> | ReactPortal | null | undefined; total_consumed_leave_days: string | number | bigint | boolean | ReactElement<any, string | JSXElementConstructor<any>> | Iterable<ReactNode> | ReactPortal | null | undefined;
+                            type: ReactNode; leave_type_name: string | number | bigint | boolean | ReactElement<any, string | JSXElementConstructor<any>> | Iterable<ReactNode> | ReactPortal | Promise<AwaitedReactNode> | null | undefined; total_consumed_leave_days: string | number | bigint | boolean | ReactElement<any, string | JSXElementConstructor<any>> | Iterable<ReactNode> | ReactPortal | Promise<AwaitedReactNode> | null | undefined; 
     }, index: Key | null | undefined) => (
                             <div key={index} className={`flex gap-1`} >
                                 <p className={classes.leaveTypes}>{leaveType?.type}</p>
