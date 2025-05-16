@@ -25,6 +25,9 @@ subscription GetLeaves($limit: Int!, $offset: Int!) {
     leave_type
     end_date
     comment
+    region
+    ville
+    localite
     employee {
       id
       license

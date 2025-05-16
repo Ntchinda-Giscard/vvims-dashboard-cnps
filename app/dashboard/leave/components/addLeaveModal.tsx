@@ -1,6 +1,6 @@
 "use client"
 import { useMutation, useQuery } from '@apollo/client';
-import { Modal, Button, Select, Textarea, Loader, rem, FileInput } from '@mantine/core';
+import { Modal, Button, Select, Textarea, Loader, rem, FileInput, TextInput } from '@mantine/core';
 import { DateInput } from '@mantine/dates';
 import { useForm } from '@mantine/form';
 import { GET_LEAVE_TYPE } from '../queries/queries';
@@ -36,6 +36,9 @@ export default function AddLeaveManagement({opened, close}: any) {
           to: null,
           from: null,
           comment: null,
+          ville: null,
+          region: null,
+          localite: null,
           employee: []
         },
     
@@ -83,7 +86,10 @@ export default function AddLeaveManagement({opened, close}: any) {
                 comment: values?.comment,
                 end_date: values?.to,
                 start_date: values?.from,
-                leave_type: values?.type
+                leave_type: values?.type,
+                region: values?.region,
+                ville: values?.ville,
+                localite: values?.localite
             },
             onCompleted: () =>{
                 toast.success("Operation successful")
@@ -133,6 +139,7 @@ export default function AddLeaveManagement({opened, close}: any) {
                         }}
                     />
 
+
                     <Select 
                         label= "Leave type"
                         data={types}
@@ -167,15 +174,50 @@ export default function AddLeaveManagement({opened, close}: any) {
                         }}
                 />
 
-                    <Select label="Employees" searchable key={form.key('employee')}
+                    
+            </div>
+            <Select label="Employees" searchable key={form.key('employee')}
                         {...form.getInputProps('employee')} 
                         data={allArr}  
                         styles={{
                             label:{color: "#404040"},
                             option:{color: "#404040"}
                         }} />
-                {/*<FileUpload />*/}
-            </div>
+            <TextInput
+                    label={"Region"}
+                        key={form.key('region')}
+                        {...form.getInputProps('region')}
+                        withAsterisk
+                        styles={{
+                            label:{
+                                color: "#404040"
+                            },
+                        }}
+                    />
+
+                    <TextInput
+                    label={"Ville"}
+                        key={form.key('ville')}
+                        {...form.getInputProps('ville')}
+                        withAsterisk
+                        styles={{
+                            label:{
+                                color: "#404040"
+                            },
+                        }}
+                    />
+
+                    <TextInput
+                    label={"Localite"}
+                        key={form.key('localite')}
+                        {...form.getInputProps('localite')}
+                        withAsterisk
+                        styles={{
+                            label:{
+                                color: "#404040"
+                            },
+                        }}
+                    />
             <div className=" mt-5 flex col gap-2 md:flex-row flex-grow" >
                 <Button loading={loadInsert} className="grow" type="submit" color={"#16DBCC"}>
                     Add leave
