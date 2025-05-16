@@ -42,7 +42,7 @@ export default function ResponsiveSizes(
     if (new Date(userInfo?.employee?.password_change_at) < new Date(data?.employees_by_pk?.password_change_at)   ){
       console.log("Logout")
       dispatch(logout())
-      // router.push("/auth/login")
+      router.push("/auth/login")
     }
   },[data])
 
