@@ -104,7 +104,7 @@ export function AttendanceReportsTable({datas}: any) {
         <Text c={"#404040"} fz="sm">{item?.reason}</Text>
       </Table.Td>
 
-      <Table.Td>
+      {/* <Table.Td>
         <Badge color={attendanceState[item?.status?.toLowerCase()]} variant="light">
           {item?.status}
         </Badge>
@@ -115,7 +115,7 @@ export function AttendanceReportsTable({datas}: any) {
         <Badge color={ item?.late ? "red" : "blue" } variant="light">
           {item?.late ? "Late" : "On time"}
         </Badge>
-      </Table.Td>
+      </Table.Td> */}
     </Table.Tr>
   ));
 
@@ -135,8 +135,8 @@ export function AttendanceReportsTable({datas}: any) {
               <Table.Th> <Text c="#404040"> Departure </Text> </Table.Th>
               <Table.Th> <Text c="#404040"> Duration </Text> </Table.Th>
               <Table.Th> <Text c="#404040"> Reason </Text> </Table.Th>
-              <Table.Th> <Text c="#404040"> Status </Text> </Table.Th>
-              <Table.Th />
+              {/* <Table.Th> <Text c="#404040"> Status </Text> </Table.Th> */}
+              {/* <Table.Th /> */}
             </Table.Tr>
           </Table.Thead>
           <Table.Tbody>{rows}</Table.Tbody>
