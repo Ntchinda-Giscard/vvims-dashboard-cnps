@@ -52,6 +52,7 @@ export default function LeavesTables({datas, onEdit, onDelete, onDeactivate}:any
       <Table.Td style={{ color: "#404044" }}>{
         //@ts-ignore
       getDaysBetweenDates(data?.start_date, data?.end_date)}</Table.Td>
+      <Table.Td style={{ color: "#404044" }}>{data?.start_date}</Table.Td>
       <Table.Td style={{ color: "#404044" }}>{data?.end_date}</Table.Td>
       <Table.Td style={{ color: "#404044" }}>
       <Badge variant="light" color={data?.status === "PENDING" ? "blue" : data?.status === "ACCEPTED" ? "teal" : "red" } >
@@ -89,6 +90,7 @@ export default function LeavesTables({datas, onEdit, onDelete, onDeactivate}:any
           <Table.Th style={{ color: "#404044" }}>Reason</Table.Th>
           <Table.Th style={{ color: "#404044" }}>Description</Table.Th>
           <Table.Th style={{ color: "#404044" }}> Delais </Table.Th>
+          <Table.Th style={{ color: "#404044" }}>From</Table.Th>
           <Table.Th style={{ color: "#404044" }}>To</Table.Th>
           <Table.Th style={{ color: "#404044" }}>Status</Table.Th>
           <Table.Th style={{ color: "#404044" }}></Table.Th>
