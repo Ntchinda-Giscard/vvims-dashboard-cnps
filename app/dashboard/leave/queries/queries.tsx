@@ -31,6 +31,7 @@ subscription GetLeaves($limit: Int!, $offset: Int!) {
       lastname
       firstname
       function
+      region
       file {
         id
         file_url
