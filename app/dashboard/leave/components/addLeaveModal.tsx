@@ -11,6 +11,7 @@ import { useSelector } from 'react-redux';
 import { IconCalendar } from '@tabler/icons-react';
 import axios from 'axios';
 import FileUpload from "@/app/dashboard/leave/components/fileUploader";
+import { GET_EMPLOYEES_QUERY } from '../../reports/query/query';
 
 export default function AddLeaveManagement({opened, close}: any) {
 
@@ -20,6 +21,13 @@ export default function AddLeaveManagement({opened, close}: any) {
     const user = useSelector((state: any) => state.auth.userInfo);
     const [value, setValue] = useState<File | null>(null);
     const [uploading, setUploading] = useState(false)
+    const [allArr, setAll] = useState([]);
+
+    const {data: dataAllEmpl, loading: loadAll, error: errAll} = useQuery(GET_EMPLOYEES_QUERY,{
+        variables:{
+            company_id: user?.employee?.company_id
+        }
+        })
 
     const form = useForm({
         mode: 'uncontrolled',
@@ -28,6 +36,7 @@ export default function AddLeaveManagement({opened, close}: any) {
           to: null,
           from: null,
           comment: null,
+          employee: []
         },
     
         validate: {
@@ -44,8 +53,21 @@ export default function AddLeaveManagement({opened, close}: any) {
             label: `${d?.type}`,
         }))
 
+        const allOptions = dataAllEmpl?.employees?.map((d: {
+            service: any;
+            department: any; id: any; firstname: any, lastname:any 
+}) =>({
+            value: d?.id,
+            label: `${d?.firstname}` + " "+ `${d?.lastname}`,
+            department: d?.department?.text_content?.content
+        }))
+
+        setAll(allOptions)
+
+        
+
         setTypes(typeOptions)
-    }, [dataType, errType, loadType])
+    }, [dataType, errType, loadType, dataAllEmpl])
 
     function handelSubmit(values: any){
         console.log(values)
@@ -56,7 +78,8 @@ export default function AddLeaveManagement({opened, close}: any) {
         insertLeave(
             {
             variables:{
-                employee_id: user?.employee?.id,
+                // employee_id: user?.employee?.id,
+                employee_id: values?.employee,
                 comment: values?.comment,
                 end_date: values?.to,
                 start_date: values?.from,
@@ -143,6 +166,14 @@ export default function AddLeaveManagement({opened, close}: any) {
                             },
                         }}
                 />
+
+                    <Select label="Employees" searchable key={form.key('employee')}
+                        {...form.getInputProps('employee')} 
+                        data={allArr}  
+                        styles={{
+                            label:{color: "#404040"},
+                            option:{color: "#404040"}
+                        }} />
                 {/*<FileUpload />*/}
             </div>
             <div className=" mt-5 flex col gap-2 md:flex-row flex-grow" >

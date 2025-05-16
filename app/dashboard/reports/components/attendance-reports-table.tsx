@@ -6,7 +6,7 @@ import { ReactElement, JSXElementConstructor, ReactNode, AwaitedReactNode, Key, 
 
 const attendanceState: Record<string, string> = {
   present: 'blue',
-  absent: 'cyan',
+  absent: 'red',
 };
 
 
@@ -26,12 +26,21 @@ export function AttendanceReportsTable({datas}: any) {
   useEffect(() =>{
     console.log( "Console data ====>", datas)
   }, [datas])
+
+  function extractTime(isoString: string): string {
+    const date = new Date(isoString);
+    const hours: string = date.getHours().toString().padStart(2, '0');
+    const minutes: string = date.getMinutes().toString().padStart(2, '0');
+    return `${hours}:${minutes}`;
+  }
+
+
   const rows = datas.map((item: {
       status: any;
       reason: ReactNode;
       late: boolean | undefined;
-      departure: ReactNode;
-      arrival: ReactNode;
+      departure: string;
+      arrival: string;
       date: ReactNode;
       employee: string;
     types: any;
@@ -53,10 +62,10 @@ export function AttendanceReportsTable({datas}: any) {
         <Text c={"#404040"} fz='sm'>{item?.date}</Text>
       </Table.Td>
       <Table.Td>
-        <Text c={"#404040"} fz='sm'>{item?.arrival}</Text>
+        <Text c={"#404040"} fz='sm'>{extractTime(item?.arrival)}</Text>
       </Table.Td>
       <Table.Td>
-        <Text c={"#404040"} fz='sm'>{item?.departure}</Text>
+        <Text c={"#404040"} fz='sm'>{extractTime(item?.departure)}</Text>
       </Table.Td>
 
       <Table.Td>
