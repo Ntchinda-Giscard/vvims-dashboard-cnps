@@ -88,12 +88,12 @@ export function AttendanceReportsTable({datas}: any) {
         <Table verticalSpacing="sm">
           <Table.Thead>
             <Table.Tr>
-              <Table.Th>Employee</Table.Th>
-              <Table.Th>Date</Table.Th>
-              <Table.Th>Arrival</Table.Th>
-              <Table.Th>Departure</Table.Th>
-              <Table.Th>Reason</Table.Th>
-              <Table.Th>Status</Table.Th>
+              <Table.Th> <Text c="#404040"> Employee </Text> </Table.Th>
+              <Table.Th> <Text c="#404040"> Date </Text> </Table.Th>
+              <Table.Th> <Text c="#404040"> Arrival </Text> </Table.Th>
+              <Table.Th> <Text c="#404040"> Departure </Text> </Table.Th>
+              <Table.Th> <Text c="#404040"> Reason </Text> </Table.Th>
+              <Table.Th> <Text c="#404040"> Status </Text> </Table.Th>
               <Table.Th />
             </Table.Tr>
           </Table.Thead>

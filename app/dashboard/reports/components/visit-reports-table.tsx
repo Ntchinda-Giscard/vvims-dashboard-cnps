@@ -95,12 +95,12 @@ export function VisitsReportsTable({datas}: any) {
         <Table verticalSpacing="sm">
           <Table.Thead>
             <Table.Tr>
-              <Table.Th>Visitor</Table.Th>
-              <Table.Th>Date</Table.Th>
-              <Table.Th>checkIn</Table.Th>
-              <Table.Th>checkOut</Table.Th>
-              <Table.Th>Reason</Table.Th>
-              <Table.Th>Status</Table.Th>
+              <Table.Th> <Text c={"#404040"}> Visitor </Text> </Table.Th>
+              <Table.Th> <Text c={"#404040"}> Date </Text> </Table.Th>
+              <Table.Th> <Text c={"#404040"}> checkIn </Text> </Table.Th>
+              <Table.Th> <Text c={"#404040"}> checkOut </Text> </Table.Th>
+              <Table.Th> <Text c={"#404040"}> Reason </Text> </Table.Th>
+              <Table.Th> <Text c={"#404040"}> Status </Text> </Table.Th>
             </Table.Tr>
           </Table.Thead>
           <Table.Tbody>{rows}</Table.Tbody>
