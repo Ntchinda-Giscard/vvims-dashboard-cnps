@@ -95,6 +95,27 @@ function Page(){
         }
     };
 
+    const clockIn = () =>{
+        const toast_id = toast.loading("Clocking in...")
+        clockin({
+                        variables:{
+                            employee_id: user?.employee?.id,
+                            location: {
+                                type: "Point",
+                                coordinates:["11.5170657", "3.8727566"]
+                            }
+                        },
+                        onCompleted: () =>{
+                            toast.dismiss(toast_id)
+                            toast.success("Clock in successful")
+                        },
+                        onError: (err) =>{
+                            toast.dismiss(toast_id)
+                            toast.error(`${err.message}`)
+                        }
+                    })
+    }
+
     const handleClockOut = () =>{
         const toast_id = toast.loading("Clocking in...")
         clockout({
@@ -121,7 +142,7 @@ function Page(){
                         <Button
                             disabled ={!!(dataAttStatus?.attendance?.[0]?.clock_out_time || loadAttStatus)}
                             loading={loadClockin || loadClockout}
-                            onClick={ dataAttStatus?.attendance?.[0]?.clock_in_time ? handleClockOut : getLocation}
+                            onClick={ dataAttStatus?.attendance?.[0]?.clock_in_time ? handleClockOut : clockIn}
                             color={dataAttStatus?.attendance?.[0]?.clock_in_time ? 'red' : ''} >
                             {
                                 dataAttStatus?.attendance?.[0]?.clock_in_time ? 'Clock out' : "Clock in"
