@@ -102,7 +102,7 @@ function Page(){
                             employee_id: user?.employee?.id,
                             location: {
                                 type: "Point",
-                                coordinates:["11.5170657", "3.8727566"]
+                                coordinates:[11.5170657, 3.8727566]
                             }
                         },
                         onCompleted: () =>{
