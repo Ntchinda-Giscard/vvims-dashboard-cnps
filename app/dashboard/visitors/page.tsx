@@ -167,7 +167,7 @@ function Page() {
                         leftSection={<IconSearch  style={{ width: rem(16), height: rem(16) }} />}
                         placeholder="search"
                     />
-                    <div className="flex flex-row gap-3">
+                    <div className="flex flex-col md:flex-row gap-3">
                         <DateInput
                         //@ts-ignore
                         value={date}
@@ -175,8 +175,9 @@ function Page() {
                         onChange={setDate}
                         // onChange={console.log}
                         placeholder="Date input"
+                        label="from"
                         leftsection={<IconCalendar style={{ width: rem(16), height: rem(16) }} />}
-                        clearable
+                        // clearable
                         styles={{
                             label:{
                                 color: "#404040"
@@ -197,8 +198,9 @@ function Page() {
                         onChange={setTo}
                         // onChange={console.log}
                         placeholder="Date input"
+                        label="to"
                         leftsection={<IconCalendar style={{ width: rem(16), height: rem(16) }} />}
-                        clearable
+                        // clearable
                         styles={{
                             label:{
                                 color: "#404040"
