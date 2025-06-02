@@ -33,7 +33,8 @@ function Page() {
     const [openedDelete, { open: openDelete, close: closeDelete }] = useDisclosure(false);
     const [activePage, setPage] = useState(1);
     const [itemsPerPage, setItemsPerPage] = useState(10);
-    const [date, setDate] = useState( new Date('2100-01-01'))
+    const [date, setDate] = useState( new Date('2000-01-01'))
+    const [to, setTo] = useState( new Date())
     const [editValue, setEditValue] = useState(null)
 //   const user = useSelector((state: any) => state.auth.userInfo);
     const [search, setSearch] = useState('');
@@ -43,13 +44,16 @@ function Page() {
             limit: itemsPerPage,
             offset: (activePage-1) * itemsPerPage,
             search: `%${search}%`,
-            date: date ? date : "2100-01-01"
+            _gte1: date ? date : "2000-01-01",
+            _lte1: to
         }
     });
+
     const {data: dataAgg, error: errAgg, loading: loadAgg} = useSubscription(GET_VISITS_AGG,{
         variables:{
             search: `%${search}%`,
-            date: date ? date : "2100-01-01"
+            _gte1: date ? date : "2000-01-01",
+            _lte1: to
         }
     })
 
@@ -163,11 +167,13 @@ function Page() {
                         leftSection={<IconSearch  style={{ width: rem(16), height: rem(16) }} />}
                         placeholder="search"
                     />
-                    <DateInput
+                    <div className="flex flex-row gap-3">
+                        <DateInput
                         //@ts-ignore
                         value={date}
                         //@ts-ignore
                         onChange={setDate}
+                        // onChange={console.log}
                         placeholder="Date input"
                         leftsection={<IconCalendar style={{ width: rem(16), height: rem(16) }} />}
                         clearable
@@ -183,6 +189,30 @@ function Page() {
                             }
                         }}
                     />
+
+                    <DateInput
+                        //@ts-ignore
+                        value={to}
+                        //@ts-ignore
+                        onChange={setTo}
+                        // onChange={console.log}
+                        placeholder="Date input"
+                        leftsection={<IconCalendar style={{ width: rem(16), height: rem(16) }} />}
+                        clearable
+                        styles={{
+                            label:{
+                                color: "#404040"
+                            },
+                            calendarHeader:{
+                                color: "#000"
+                            },
+                            calendarHeaderControl:{
+                                color: "#000"
+                            }
+                        }}
+                    />
+                    </div>
+                    
                 </div>
                 {
                     loadVisits || errVisits ?
