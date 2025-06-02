@@ -28,25 +28,24 @@ const adminSecret = "aFVeqGfcVsDTpS7efXQZ1rlMyIJugSBJ";
 const [token, setToken ] = useState(null)
 useEffect(() =>{
   const tokenLocal = window.localStorage.getItem('token')
+  console.log(token)
   //@ts-ignore
   setToken(tokenLocal)
-},[])
+},[token])
 
 const httpLink = new HttpLink({
   uri: 'http://172.17.15.28:30011/v1/graphql',
-  // uri: 'https://faithful-lynx-39.hasura.app/v1/graphql',
   headers: {
-    'x-hasura-admin-secret': adminSecret, // Add the admin secret in the header
+    'x-hasura-admin-secret': adminSecret, 
     Authorization: `Bearer ${token}`
   }
 });
 
 const wsLink = new GraphQLWsLink(createClient({
   url: 'ws://172.17.15.28:30011/v1/graphql',
-  // uri: 'https://faithful-lynx-39.hasura.app/v1/graphql',
   connectionParams: {
     headers: {
-      'x-hasura-admin-secret': adminSecret, // Add the admin secret for websocket connections too
+      'x-hasura-admin-secret': adminSecret, 
       Authorization: `Bearer ${token}`
     }
   }
