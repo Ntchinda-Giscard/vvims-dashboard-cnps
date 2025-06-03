@@ -27,38 +27,52 @@ export function AttendanceReportsTable({datas}: any) {
     console.log( "Console data ====>", datas)
   }, [datas])
 
-  function extractTime(isoString: string): string {
-    const date = new Date(isoString);
-    const hours: string = date.getHours().toString().padStart(2, '0');
-    const minutes: string = date.getMinutes().toString().padStart(2, '0');
-    return `${hours}:${minutes}`;
-  }
+  function extractTime(isoString: string | null | undefined): string | null {
+  if (!isoString) return null;
+
+  const date = new Date(isoString);
+  if (isNaN(date.getTime())) return null; // invalid date
+
+  const hours: string = date.getHours().toString().padStart(2, '0');
+  const minutes: string = date.getMinutes().toString().padStart(2, '0');
+  return `${hours}:${minutes}`;
+}
+
 
   /**
  * Calculate duration between two times in "HH:mm" format.
  */
-  function calculateDuration(startTime: string, endTime: string): string {
-    const [startHour, startMinute] = startTime.split(":").map(Number);
-    const [endHour, endMinute] = endTime.split(":").map(Number);
-  
-    const start = new Date();
-    start.setHours(startHour, startMinute, 0, 0);
-  
-    const end = new Date();
-    end.setHours(endHour, endMinute, 0, 0);
-  
-    let diff = (end.getTime() - start.getTime()) / (1000 * 60); // difference in minutes
-  
-    if (diff < 0) {
-      // handle cases where end time is on the next day
-      diff += 24 * 60;
-    }
-  
-    const hours = Math.floor(diff / 60);
-    const minutes = Math.floor(diff % 60);
-  
-    return `${hours}h ${minutes}m`;
+  function calculateDuration(startTime?: string, endTime?: string): string | null {
+  if (!startTime || !endTime) return null;
+
+  const [startHour, startMinute] = startTime.split(":").map(Number);
+  const [endHour, endMinute] = endTime.split(":").map(Number);
+
+  if (
+    isNaN(startHour) || isNaN(startMinute) ||
+    isNaN(endHour) || isNaN(endMinute)
+  ) {
+    return null;
   }
+
+  const start = new Date();
+  start.setHours(startHour, startMinute, 0, 0);
+
+  const end = new Date();
+  end.setHours(endHour, endMinute, 0, 0);
+
+  let diff = (end.getTime() - start.getTime()) / (1000 * 60); // difference in minutes
+
+  if (diff < 0) {
+    diff += 24 * 60; // handle overnight duration
+  }
+
+  const hours = Math.floor(diff / 60);
+  const minutes = Math.floor(diff % 60);
+
+  return `${hours}h ${minutes}m`;
+}
+
   
 
 
@@ -68,7 +82,7 @@ export function AttendanceReportsTable({datas}: any) {
       reason: ReactNode;
       late: boolean | undefined;
       departure: string;
-      arrival: string;
+      arrival: string | null;
       date: ReactNode;
       employee: string;
     types: any;
@@ -97,7 +111,10 @@ export function AttendanceReportsTable({datas}: any) {
       </Table.Td>
 
       <Table.Td>
-        <Text c={"#404040"} fz='sm'>{ calculateDuration(extractTime(item?.departure), extractTime(item?.arrival))}</Text>
+        <Text c={"#404040"} fz='sm'>{ 
+        //@ts-ignore
+        calculateDuration( extractTime(item?.arrival), extractTime(item?.departure)  )
+        }</Text>
       </Table.Td>
 
       <Table.Td>
