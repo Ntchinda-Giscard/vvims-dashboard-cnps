@@ -1,24 +1,8 @@
 import { gql } from "@apollo/client";
 
 export const GET_VISITS = gql`
-  subscription GetVisitss(
-  $limit: Int! = 10, 
-  $offset: Int! = 0, 
-  $search: String = "%%" 
-  $_gte1: timestamptz = "2000-01-01", 
-  $_lte1: timestamptz = "2025-06-02") {
-  visits(
-    limit: $limit, 
-    offset: $offset, 
-    where: {
-      created_at: {_gte: $_gte1, _lte: $_lte1},
-      _or: [
-      {visitorByVisitor: {lastname: {_ilike: $search}}},
-      {visitorByVisitor: {firstname: {_ilike: $search}}}, 
-      {visitorByVisitor: {phone_number: {_ilike: $search}}}
-    ],
-    }
-  ) {
+  subscription GetVisitss($limit: Int! = 10, $offset: Int! = 0, $search: String = "%%", $_gte1: timestamptz = "2000-01-01", $_lte1: timestamptz = "") {
+  visits(limit: $limit, offset: $offset, where: {created_at: {_gte: $_gte1, _lte: $_lte1}, _or: [{visitorByVisitor: {lastname: {_ilike: $search}}}, {visitorByVisitor: {firstname: {_ilike: $search}}}, {visitorByVisitor: {phone_number: {_ilike: $search}}}]}, order_by: {created_at: desc}) {
     reason
     id
     date
