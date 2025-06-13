@@ -30,11 +30,11 @@ mutation MyMutation(
       visitorName
     }
     leaveData {
-      employee
-      start_date
-      end_date
       duration
+      employee
+      endDate
       reason
+      startDate
     }
   }
 }`;
