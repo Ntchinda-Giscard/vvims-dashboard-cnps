@@ -1,7 +1,7 @@
 "use client"
 import { useMutation, useQuery } from '@apollo/client';
-import { Modal, Button, Select, Textarea, Loader, rem, FileInput, TextInput } from '@mantine/core';
-import { DateInput } from '@mantine/dates';
+import { Modal, Button, Select, Textarea, Loader, rem, FileInput, TextInput, Text, Switch } from '@mantine/core';
+import { DateInput, TimeInput } from '@mantine/dates';
 import { useForm } from '@mantine/form';
 import { GET_LEAVE_TYPE } from '../queries/queries';
 import { useEffect, useState } from 'react';
@@ -19,9 +19,11 @@ export default function AddLeaveManagement({opened, close}: any) {
     const [insertLeave, {loading: loadInsert}] = useMutation(INSERT_LEAVE);
     const [types, setTypes] = useState([]);
     const user = useSelector((state: any) => state.auth.userInfo);
-    const [value, setValue] = useState<File | null>(null);
+    const [other, setOther] = useState<string | null>(null);
     const [uploading, setUploading] = useState(false)
     const [allArr, setAll] = useState([]);
+    const [from, setFrom] = useState<Date | null>(null);
+    const [to, setTo] = useState<Date | null>(null);
 
     const {data: dataAllEmpl, loading: loadAll, error: errAll} = useQuery(GET_EMPLOYEES_QUERY,{
         variables:{
@@ -36,10 +38,11 @@ export default function AddLeaveManagement({opened, close}: any) {
           to: null,
           from: null,
           comment: null,
-        //   ville: null,
-        //   region: null,
+          start_time: null,
+          end_time: null,
         //   localite: null,
-          employee: []
+          employee: [],
+          describtion: null,
         },
     
         validate: {
@@ -49,6 +52,21 @@ export default function AddLeaveManagement({opened, close}: any) {
             comment: (value) => ( value !== null ? null : 'Invalid comment'),
         },
       });
+
+    form.watch('from', ({ previousValue, value, touched, dirty }) => {
+        console.log({ previousValue, value, touched, dirty });
+        setFrom(value);
+    });
+
+    form.watch('to', ({ previousValue, value, touched, dirty }) => {
+        console.log({ previousValue, value, touched, dirty });
+        setTo(value);
+    });
+
+    form.watch('type', ({ previousValue, value, touched, dirty }) => {
+        console.log({ previousValue, value, touched, dirty });
+        setOther(value);
+    });
 
     useEffect(() =>{
         const typeOptions = dataType?.leave_type?.map((d: { type: any; }) =>({
@@ -102,13 +120,39 @@ export default function AddLeaveManagement({opened, close}: any) {
         )
     }
 
+    function daysBetweenDates(date1: Date | string | null | undefined, date2: Date | string | null | undefined): number | null {
+  if (!date1 || !date2) {
+    return null;
+  }
+
+  const d1 = new Date(date1);
+  const d2 = new Date(date2);
+
+  // Check for invalid dates
+  if (isNaN(d1.getTime()) || isNaN(d2.getTime())) {
+    return null;
+  }
+
+  const msPerDay = 1000 * 60 * 60 * 24;
+  const diffTime = Math.abs(d2.getTime() - d1.getTime());
+  return Math.floor(diffTime / msPerDay);
+}
+
+
   return (
     <>
       <Modal opened={opened} onClose={close} title= {<p style={{color: "#404040"}} > Leave application </p>}>
         {/* Modal content */}
         <form onSubmit={form.onSubmit((values) => handelSubmit(values))}>
+
             <div className="flex flex-col md:flex-row gap-4">
-                <div className="flex flex-col gap-3">
+                <Switch label="Hourly leave" styles={{
+                                    label:{
+                                        color: "#404040"
+                                    },
+                                }} />
+
+               { <>
                     <DateInput
                         minDate={new Date()}
                         label="From"
@@ -138,6 +182,37 @@ export default function AddLeaveManagement({opened, close}: any) {
                             },
                         }}
                     />
+                </>}
+
+                {
+                        <>
+                            <TimeInput
+                            label="Start time"
+                            placeholder="Start time"
+                            withAsterisk
+                            key={form.key('start_time')}
+                            {...form.getInputProps('start_time')}
+                            styles={{
+                                    label:{
+                                        color: "#404040"
+                                    },
+                                }}
+                        />
+                        <TimeInput
+                            label="End time"
+                            placeholder="End time"
+                            withAsterisk
+                            key={form.key('end_time')}
+                            {...form.getInputProps('end_time')}
+                            styles={{
+                                    label:{
+                                        color: "#404040"
+                                    },
+                                }}
+                        />
+                        </>
+                    }
+                    <Text mt={8} c={'blue'} fw={300} > Number of days: {daysBetweenDates(from, to)} </Text>
 
 
                     <Select 
@@ -159,7 +234,22 @@ export default function AddLeaveManagement({opened, close}: any) {
                             }
                         }}
                     />
-                </div>
+                    {
+                        other === "Other" && 
+                        <TextInput
+                            label="Other type"
+                            placeholder="Type here..."
+                            withAsterisk
+                            key={form.key('describtion')}
+                            {...form.getInputProps('describtion')}
+                            styles={{
+                                label:{
+                                    color: "#404040"
+                                },
+                            }}
+                        />
+                    }
+                    
                 <Textarea
                     size="lg"
                     label="Comment"
