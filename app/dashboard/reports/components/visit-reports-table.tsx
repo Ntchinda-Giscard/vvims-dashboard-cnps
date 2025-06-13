@@ -1,7 +1,8 @@
+"use client";
 import { IconPencil, IconTrash, IconDownload, IconPrinter } from '@tabler/icons-react';
-import { ActionIcon, Anchor, Avatar, Badge, Button, Group, rem, Table, Text } from '@mantine/core';
+import { ActionIcon, Anchor, Avatar, Badge, Button, Group, rem, ScrollArea, Table, Text } from '@mantine/core';
 import Link from "next/link"
-import { ReactElement, JSXElementConstructor, ReactNode, AwaitedReactNode, Key, ReactPortal, useEffect, useRef } from 'react';
+import { ReactElement, JSXElementConstructor, ReactNode, AwaitedReactNode, Key, ReactPortal, useEffect, useRef, useState } from 'react';
 
 
 const attendanceState: Record<string, string> = {
@@ -12,6 +13,7 @@ const attendanceState: Record<string, string> = {
 
 
 export function VisitsReportsTable({datas}: any) {
+  const [scrolled, setScrolled] = useState(false)
   const tableRef = useRef<HTMLDivElement>(null);  // Create a ref to target the table
   useEffect(() =>{
     console.log( "Console data ====>", datas)
@@ -90,7 +92,7 @@ export function VisitsReportsTable({datas}: any) {
       <Button onClick={handlePrint} leftSection={<IconPrinter style={{ width: rem(16), height: rem(16) }} stroke={1} />}>
               PDF
             </Button>
-      <Table.ScrollContainer minWidth={800}>
+      <ScrollArea h={400} onScrollPositionChange={({y}) => setScrolled(y !== 0)}>
       <div ref={tableRef}>
         <Table verticalSpacing="sm">
           <Table.Thead>
@@ -106,7 +108,7 @@ export function VisitsReportsTable({datas}: any) {
           <Table.Tbody>{rows}</Table.Tbody>
         </Table>
       </div>
-      </Table.ScrollContainer>
+      </ScrollArea>
     </>
   );
 }

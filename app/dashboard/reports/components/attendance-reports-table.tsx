@@ -145,9 +145,8 @@ export function AttendanceReportsTable({datas}: any) {
                 </Button>
       <ScrollArea h={400} onScrollPositionChange={({y}) => setScrolled(y !== 0)}>
 
-        <Table.ScrollContainer minWidth={800}>
         <div ref={tableRef}>
-          <Table verticalSpacing="sm">
+          <Table withRowBorders miw={700}>
             <Table.Thead>
               <Table.Tr>
                 <Table.Th> <Text c="#404040"> Employee </Text> </Table.Th>
@@ -163,7 +162,6 @@ export function AttendanceReportsTable({datas}: any) {
             <Table.Tbody>{rows}</Table.Tbody>
           </Table>
         </div>
-        </Table.ScrollContainer>
       </ScrollArea>
     </>
   );
