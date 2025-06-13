@@ -18,14 +18,26 @@ export default function AttendanceTable({ datas, onEdit, onDelete, onDeactivate 
         return date.toLocaleTimeString('en-US', options);
     };
 
-    function minutesLate(clockIn: string): number {
-                const [hours, minutes] = clockIn.split(':').map(Number);
-                const clockInMinutes = hours * 60 + minutes;
-                const expectedMinutes = 7 * 60 + 30; // 07:30 AM = 450 minutes
+    function minutesLate(clockIn: string | null | undefined): number {
+  if (!clockIn || !clockIn.includes(':')) {
+    return 0; // Pas de clock-in => considéré comme non en retard (ou gérer différemment si besoin)
+  }
 
-                const diff = clockInMinutes - expectedMinutes;
-                return Math.max(0, diff);
-                }
+  const [hoursStr, minutesStr] = clockIn.split(':');
+  const hours = Number(hoursStr);
+  const minutes = Number(minutesStr);
+
+  if (isNaN(hours) || isNaN(minutes)) {
+    return 0; // Format invalide => non en retard
+  }
+
+  const clockInMinutes = hours * 60 + minutes;
+  const expectedMinutes = 7 * 60 + 30; // 07:30 AM = 450 minutes
+
+  const diff = clockInMinutes - expectedMinutes;
+  return Math.max(0, diff);
+}
+
 
 
     const handlePrint = () => {
