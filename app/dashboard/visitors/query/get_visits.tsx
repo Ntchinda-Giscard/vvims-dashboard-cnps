@@ -28,6 +28,8 @@ export const GET_VISITS = gql`
     }
     visitorByVisitor {
       firstname
+      fileByPhoto{
+        file_url}
       lastname
     }
   }
