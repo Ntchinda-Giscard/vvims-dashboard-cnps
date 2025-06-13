@@ -1,7 +1,8 @@
+"use client";
 import { IconPencil, IconTrash, IconDownload, IconPrinter } from '@tabler/icons-react';
-import { ActionIcon, Anchor, Avatar, Badge, Button, Group, rem, Table, Text } from '@mantine/core';
+import { ActionIcon, Anchor, Avatar, Badge, Button, Group, rem, ScrollArea, Table, Text } from '@mantine/core';
 import Link from "next/link"
-import { ReactElement, JSXElementConstructor, ReactNode, AwaitedReactNode, Key, ReactPortal, useEffect, useRef } from 'react';
+import { ReactElement, JSXElementConstructor, ReactNode, AwaitedReactNode, Key, ReactPortal, useEffect, useRef, useState } from 'react';
 
 
 const attendanceState: Record<string, string> = {
@@ -11,6 +12,7 @@ const attendanceState: Record<string, string> = {
 
 
 export function AttendanceReportsTable({datas}: any) {
+  const [scrolled, setScrolled] = useState(false)
   const tableRef = useRef<HTMLDivElement>(null);  // Create a ref to target the table
   const handlePrint = () => {
     const printContents = tableRef.current?.innerHTML;  // Get the table content
@@ -141,25 +143,28 @@ export function AttendanceReportsTable({datas}: any) {
     <Button onClick={handlePrint} leftSection={<IconPrinter style={{ width: rem(16), height: rem(16) }} stroke={1} />}>
                   PDF
                 </Button>
-      <Table.ScrollContainer minWidth={800}>
-      <div ref={tableRef}>
-        <Table verticalSpacing="sm">
-          <Table.Thead>
-            <Table.Tr>
-              <Table.Th> <Text c="#404040"> Employee </Text> </Table.Th>
-              <Table.Th> <Text c="#404040"> Date </Text> </Table.Th>
-              <Table.Th> <Text c="#404040"> Arrival </Text> </Table.Th>
-              <Table.Th> <Text c="#404040"> Departure </Text> </Table.Th>
-              <Table.Th> <Text c="#404040"> Duration </Text> </Table.Th>
-              <Table.Th> <Text c="#404040"> Reason </Text> </Table.Th>
-              {/* <Table.Th> <Text c="#404040"> Status </Text> </Table.Th> */}
-              {/* <Table.Th /> */}
-            </Table.Tr>
-          </Table.Thead>
-          <Table.Tbody>{rows}</Table.Tbody>
-        </Table>
-      </div>
-      </Table.ScrollContainer>
+      <ScrollArea h={400} onScrollPositionChange={({y}) => setScrolled(y !== 0)}>
+
+        <Table.ScrollContainer minWidth={800}>
+        <div ref={tableRef}>
+          <Table verticalSpacing="sm">
+            <Table.Thead>
+              <Table.Tr>
+                <Table.Th> <Text c="#404040"> Employee </Text> </Table.Th>
+                <Table.Th> <Text c="#404040"> Date </Text> </Table.Th>
+                <Table.Th> <Text c="#404040"> Arrival </Text> </Table.Th>
+                <Table.Th> <Text c="#404040"> Departure </Text> </Table.Th>
+                <Table.Th> <Text c="#404040"> Duration </Text> </Table.Th>
+                <Table.Th> <Text c="#404040"> Reason </Text> </Table.Th>
+                {/* <Table.Th> <Text c="#404040"> Status </Text> </Table.Th> */}
+                {/* <Table.Th /> */}
+              </Table.Tr>
+            </Table.Thead>
+            <Table.Tbody>{rows}</Table.Tbody>
+          </Table>
+        </div>
+        </Table.ScrollContainer>
+      </ScrollArea>
     </>
   );
 }
