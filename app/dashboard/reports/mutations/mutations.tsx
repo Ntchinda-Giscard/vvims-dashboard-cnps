@@ -29,5 +29,12 @@ mutation MyMutation(
       status
       visitorName
     }
+    leaveData {
+      employee
+      start_date
+      end_date
+      duration
+      reason
+    }
   }
 }`;
