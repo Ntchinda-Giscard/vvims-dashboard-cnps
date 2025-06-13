@@ -36,9 +36,9 @@ export default function AddLeaveManagement({opened, close}: any) {
           to: null,
           from: null,
           comment: null,
-          ville: null,
-          region: null,
-          localite: null,
+        //   ville: null,
+        //   region: null,
+        //   localite: null,
           employee: []
         },
     
@@ -87,9 +87,9 @@ export default function AddLeaveManagement({opened, close}: any) {
                 end_date: values?.to,
                 start_date: values?.from,
                 leave_type: values?.type,
-                region: values?.region,
-                ville: values?.ville,
-                localite: values?.localite
+                // region: values?.region,
+                // ville: values?.ville,
+                // localite: values?.localite
             },
             onCompleted: () =>{
                 toast.success("Operation successful")
@@ -183,7 +183,7 @@ export default function AddLeaveManagement({opened, close}: any) {
                             label:{color: "#404040"},
                             option:{color: "#404040"}
                         }} />
-            <TextInput
+            {/* <TextInput
                     label={"Region"}
                         key={form.key('region')}
                         {...form.getInputProps('region')}
@@ -217,7 +217,7 @@ export default function AddLeaveManagement({opened, close}: any) {
                                 color: "#404040"
                             },
                         }}
-                    />
+                    /> */}
             <div className=" mt-5 flex col gap-2 md:flex-row flex-grow" >
                 <Button loading={loadInsert} className="grow" type="submit" color={"#16DBCC"}>
                     Add leave
