@@ -145,7 +145,7 @@ export default function Page(){
                         mt={'lg'}
                         withAsterisk
                         radius={'md'}
-                        data={['Visits', 'Attendance']}
+                        data={['Visits', 'Attendance', 'Leaves']}
                         defaultValue={'Visits'}
                         label="Reports type"
                         placeholder="select"
