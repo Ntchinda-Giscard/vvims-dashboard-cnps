@@ -1,6 +1,6 @@
 "use client"
 import { useMutation, useQuery } from '@apollo/client';
-import { Modal, Button, Select, Textarea, Loader, rem, FileInput, TextInput, Text, Switch } from '@mantine/core';
+import { Modal, Button, Select, Textarea, Loader, rem, FileInput, TextInput, Text, Switch, Checkbox } from '@mantine/core';
 import { DateInput, TimeInput } from '@mantine/dates';
 import { useForm } from '@mantine/form';
 import { GET_LEAVE_TYPE } from '../queries/queries';
@@ -12,6 +12,7 @@ import { IconCalendar } from '@tabler/icons-react';
 import axios from 'axios';
 import FileUpload from "@/app/dashboard/leave/components/fileUploader";
 import { GET_EMPLOYEES_QUERY } from '../../reports/query/query';
+import { start } from 'repl';
 
 export default function AddLeaveManagement({opened, close}: any) {
 
@@ -21,6 +22,7 @@ export default function AddLeaveManagement({opened, close}: any) {
     const user = useSelector((state: any) => state.auth.userInfo);
     const [other, setOther] = useState<string | null>(null);
     const [uploading, setUploading] = useState(false)
+    const [checked, setChecked] = useState(true);
     const [allArr, setAll] = useState([]);
     const [from, setFrom] = useState<Date | null>(null);
     const [to, setTo] = useState<Date | null>(null);
@@ -102,9 +104,12 @@ export default function AddLeaveManagement({opened, close}: any) {
                 // employee_id: user?.employee?.id,
                 employee_id: values?.employee,
                 comment: values?.comment,
-                end_date: values?.to,
-                start_date: values?.from,
+                end_date: checked ? values?.to : null,
+                start_date: checked ? values?.from : null,
+                start_time: !checked ? values?.start_time : null,
+                end_time: !checked ? values?.end_time : null,
                 leave_type: values?.type,
+                other_description: other ? values?.describtion : null,
                 // region: values?.region,
                 // ville: values?.ville,
                 // localite: values?.localite
@@ -146,13 +151,17 @@ export default function AddLeaveManagement({opened, close}: any) {
         <form onSubmit={form.onSubmit((values) => handelSubmit(values))}>
 
             <div className="flex flex-col md:flex-row gap-4">
-                <Switch label="Hourly leave" styles={{
-                                    label:{
-                                        color: "#404040"
-                                    },
-                                }} />
+                <Checkbox
+                                        mt="md"
+                                        label="Hourly leave"
+                                        onChange={(event) => setChecked(event.currentTarget.checked)}
+                                        styles={{
+                                                label:{color: "#404040"},
+                                            
+                                        }}
+                                    />
 
-               { <>
+               { !checked && <>
                     <DateInput
                         minDate={new Date()}
                         label="From"
@@ -185,7 +194,7 @@ export default function AddLeaveManagement({opened, close}: any) {
                 </>}
 
                 {
-                        <>
+                    checked &&    <>
                             <TimeInput
                             label="Start time"
                             placeholder="Start time"
@@ -212,7 +221,7 @@ export default function AddLeaveManagement({opened, close}: any) {
                         />
                         </>
                     }
-                    <Text mt={8} c={'blue'} fw={300} > Number of days: {daysBetweenDates(from, to)} </Text>
+                    { checked && <Text mt={8} c={'blue'} fw={300} > Number of days: {daysBetweenDates(from, to)} </Text>}
 
 
                     <Select 
