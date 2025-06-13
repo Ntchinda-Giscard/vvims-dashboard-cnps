@@ -18,19 +18,20 @@ export default function AttendanceTable({ datas, onEdit, onDelete, onDeactivate 
         return date.toLocaleTimeString('en-US', options);
     };
 
-   function minutesLate(clockIn: string | null | undefined): number {
-  if (!clockIn || typeof clockIn !== 'string') return 0;
+function minutesLate(clockIn: string | null | undefined): number {
+    if (!clockIn || typeof clockIn !== 'string') return 0;
 
-  const parts = clockIn.split(':').map(Number);
+    const trimmed = clockIn.trim();
+    const parts = trimmed.split(':').map((part) => Number(part.trim()));
 
-  if (parts.length < 2 || parts.some(isNaN)) return 0;
+    if (parts.length < 2 || parts.some(isNaN)) return 0;
 
-  const [hours, minutes, seconds = 0] = parts;
-  const clockInMinutes = hours * 60 + minutes + (seconds >= 30 ? 1 : 0);
-  const expectedMinutes = 7 * 60 + 30;
+    const [hours, minutes, seconds = 0] = parts;
+    const clockInMinutes = hours * 60 + minutes + (seconds >= 30 ? 1 : 0);
+    const expectedMinutes = 7 * 60 + 30;
 
-  const diff = clockInMinutes - expectedMinutes;
-  return Math.max(0, diff);
+    const diff = clockInMinutes - expectedMinutes;
+    return Math.max(0, diff);
 }
 
 
