@@ -18,6 +18,16 @@ export default function AttendanceTable({ datas, onEdit, onDelete, onDeactivate 
         return date.toLocaleTimeString('en-US', options);
     };
 
+    function minutesLate(clockIn: string): number {
+                const [hours, minutes] = clockIn.split(':').map(Number);
+                const clockInMinutes = hours * 60 + minutes;
+                const expectedMinutes = 7 * 60 + 30; // 07:30 AM = 450 minutes
+
+                const diff = clockInMinutes - expectedMinutes;
+                return Math.max(0, diff);
+                }
+
+
     const handlePrint = () => {
         const printContents = tableRef.current?.innerHTML;  // Get the table content
         const originalContents = document.body.innerHTML;   // Save the original page content
@@ -32,7 +42,7 @@ export default function AttendanceTable({ datas, onEdit, onDelete, onDeactivate 
 
     const rows = datas?.map((data: {
         clock_out_time: ReactNode;
-        clock_in_time: ReactNode;
+        clock_in_time: ReactNode | string;
         attendance_state: any;
         clock_in_date: ReactNode;
         employee: any;
@@ -55,6 +65,10 @@ export default function AttendanceTable({ datas, onEdit, onDelete, onDeactivate 
             <Table.Td style={{ color: "#404044" }}>{data?.employee?.service?.text_content?.content}</Table.Td>
             <Table.Td style={{ color: "#404044" }}>{data?.clock_in_date}</Table.Td>
             <Table.Td style={{ color: "#404044" }}>{time_extract(data?.clock_in_time)}</Table.Td>
+            <Table.Td style={{ color: "#404044" }}>
+                {typeof data?.clock_in_time === "string" ? minutesLate(data.clock_in_time) : "--"}
+            </Table.Td>
+
             <Table.Td style={{ color: "#404044" }}>
                 {data?.attendance_state?.is_late ? (
                     <IconX key={data?.id} style={{width: rem(10), height: rem(10)}} color="red" />
@@ -83,6 +97,7 @@ export default function AttendanceTable({ datas, onEdit, onDelete, onDeactivate 
                                 <Table.Th style={{ color: "#404044" }}>Service</Table.Th>
                                 <Table.Th style={{ color: "#404044" }}>Date</Table.Th>
                                 <Table.Th style={{ color: "#404044" }}>Clock in time</Table.Th>
+                                <Table.Th style={{ color: "#404044" }}>Minutes late</Table.Th>
                                 <Table.Th style={{ color: "#404044" }}></Table.Th>
                                 <Table.Th style={{ color: "#404044" }}>Clock out time</Table.Th>
                             </Table.Tr>
